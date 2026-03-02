@@ -22,6 +22,14 @@ const faqs = [
   },
 ];
 
+const steps = [
+  ['Sign Up', 'Create your account in under a minute.'],
+  ['Provide Information', 'Enter your business and branding details.'],
+  ['Submit Listing Data', 'Upload property information and media in one place.'],
+  ['Preview', 'Review and approve your content before launch.'],
+  ['Publish', 'Go live and start attracting more qualified leads.'],
+];
+
 export default function HomePage() {
   const [theme, setTheme] = useState('light');
   const [openFaq, setOpenFaq] = useState(-1);
@@ -44,10 +52,10 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <title>Launch-Ready Real Estate Agent Marketing Service</title>
+        <title>Best Real Estate Agent Websites Built to Rank and Convert</title>
         <meta
           name="description"
-          content="A modern conversion-focused website template where real estate agents can quickly purchase your digital service and launch listing-ready content in minutes."
+          content="Modern, conversion-focused real estate agent websites with a frictionless onboarding flow, clear pricing CTA, FAQ, and contact form."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
@@ -87,29 +95,29 @@ export default function HomePage() {
       </header>
 
       <main id="main-content">
-        <section className="hero" id="pricing">
+        <section className="hero" id="pricing" aria-labelledby="hero-title">
           <div className="container hero-grid">
             <div className="hero-copy">
-              <p className="eyebrow">Built for busy real estate agents</p>
-              <h1>Turn more listing traffic into qualified leads with a done-for-you digital package.</h1>
-              <p>
-                Launch polished marketing assets faster, capture seller and buyer interest, and keep your brand
-                looking professional without spending hours on setup.
+              <p className="hero-chip">SEO-First Real Estate Websites</p>
+              <h1 id="hero-title">Best Real Estate Agent Websites Built to Rank and Convert.</h1>
+              <p className="hero-subcopy">
+                Launch a search-optimized website that helps local buyers and sellers find you first. Publish quickly,
+                edit anytime, and grow your pipeline without hiring a developer.
               </p>
               <div className="hero-actions">
-                <a className="btn btn-primary" href="#contact">
+                <a className="btn btn-primary btn-lg" href="#pricing">
                   Start for ${PRICE}
                 </a>
-                <a className="btn btn-secondary" href="#how-it-works">
-                  Learn How It Works
+                <a className="btn btn-secondary btn-lg" href="#contact">
+                  Get in Contact
                 </a>
               </div>
-              <p className="trust-note">No technical skills needed. Set up in minutes.</p>
             </div>
+
             <div className="hero-image-wrap">
               <img
-                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80"
-                alt="Real estate agent showing a modern home to clients"
+                src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?auto=format&fit=crop&w=1400&q=80"
+                alt="Modern downtown high-rise buildings viewed from below"
                 className="hero-image"
               />
             </div>
@@ -119,15 +127,9 @@ export default function HomePage() {
         <section className="wizard" id="how-it-works" aria-labelledby="wizard-title">
           <div className="container wizard-box">
             <h2 id="wizard-title">How It Works</h2>
-            <p className="section-intro">A frictionless 5-step flow designed to get your listing content live quickly.</p>
+            <p className="section-intro">Simple onboarding in five clear steps—built for busy agents.</p>
             <ol className="wizard-steps">
-              {[
-                ['Sign Up', 'Create your account in under a minute.'],
-                ['Provide Information', 'Enter your business and branding details.'],
-                ['Submit Listing Data', 'Upload property information and media in one place.'],
-                ['Preview', 'Review and approve your content before launch.'],
-                ['Publish', 'Go live and start attracting more qualified leads.'],
-              ].map(([title, description], idx) => (
+              {steps.map(([title, description], idx) => (
                 <li key={title}>
                   <span className="step-number">{idx + 1}</span>
                   <div>
@@ -141,17 +143,27 @@ export default function HomePage() {
         </section>
 
         <section className="faq" id="faqs" aria-labelledby="faq-title">
-          <div className="container">
+          <div className="container section-head">
             <h2 id="faq-title">Frequently Asked Questions</h2>
             <p className="section-intro">Quick answers to common questions from agents.</p>
-            <div className="faq-list">
-              {faqs.map((item, idx) => (
-                <details key={item.q} open={openFaq === idx} onToggle={() => setOpenFaq((prev) => (prev === idx ? -1 : idx))}>
-                  <summary>{item.q}</summary>
-                  <p>{item.a}</p>
-                </details>
-              ))}
-            </div>
+          </div>
+          <div className="container faq-list">
+            {faqs.map((item, idx) => (
+              <details
+                key={item.q}
+                open={openFaq === idx}
+                onToggle={(event) => {
+                  if (event.currentTarget.open) {
+                    setOpenFaq(idx);
+                  } else if (openFaq === idx) {
+                    setOpenFaq(-1);
+                  }
+                }}
+              >
+                <summary>{item.q}</summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
           </div>
         </section>
 
