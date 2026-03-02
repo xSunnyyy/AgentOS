@@ -68,13 +68,12 @@ body { line-height: 1.55; }
 }
 
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
+  position: relative;
+  z-index: 10;
   border-bottom: 1px solid var(--stroke);
   background: color-mix(in oklab, var(--bg) 74%, transparent);
-  backdrop-filter: blur(10px);
 }
+
 
 .nav-wrap {
   min-height: 80px;
@@ -414,6 +413,16 @@ textarea {
   .hero-actions {
     justify-content: center;
   }
+
+  .hero-actions .btn {
+    min-width: 0;
+    flex: 1 1 0;
+  }
+
+  .hero-actions {
+    width: 100%;
+  }
+
 
   .hero-image-wrap { min-height: 340px; }
 
