@@ -44,7 +44,7 @@ const steps = [
   },
   {
     title: 'Publish & Activate',
-    description: 'When you're ready to launch, choose your plan and publish your site instantly. Start capturing buyer and seller leads with a polished, SEO-optimized real estate website.',
+    description: "When you're ready to launch, choose your plan and publish your site instantly. Start capturing buyer and seller leads with a polished, SEO-optimized real estate website.",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M4 12h16M13 6l7 6-7 6" />
