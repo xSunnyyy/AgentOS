@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
-const PRICE = 97;
+const PRICE = 50;
 
 const faqs = [
   {
@@ -23,11 +23,21 @@ const faqs = [
 ];
 
 const steps = [
-  ['Sign Up', 'Create your account in under a minute.'],
-  ['Provide Information', 'Enter your business and branding details.'],
-  ['Submit Listing Data', 'Upload property information and media in one place.'],
-  ['Preview', 'Review and approve your content before launch.'],
-  ['Publish', 'Go live and start attracting more qualified leads.'],
+  {
+    title: 'Create Account',
+    description: 'Set up your account in minutes with secure onboarding and instant access.',
+    glyph: '▭',
+  },
+  {
+    title: 'Enter Information',
+    description: 'Share your business profile and listing details so we can tailor everything for you.',
+    glyph: '▮▮▮',
+  },
+  {
+    title: 'Add Payment',
+    description: 'Complete checkout and launch immediately with everything ready to publish.',
+    glyph: '$',
+  },
 ];
 
 export default function HomePage() {
@@ -78,15 +88,6 @@ export default function HomePage() {
           </nav>
 
           <div className="nav-actions">
-            <button
-              id="theme-toggle"
-              className="theme-toggle"
-              type="button"
-              aria-label="Toggle light and dark mode"
-              onClick={toggleTheme}
-            >
-              {theme === 'dark' ? '☀️' : '🌙'}
-            </button>
             <a className="btn btn-primary" href="#pricing">
               Start for ${PRICE}
             </a>
@@ -125,17 +126,27 @@ export default function HomePage() {
         </section>
 
         <section className="wizard" id="how-it-works" aria-labelledby="wizard-title">
-          <div className="container wizard-box">
-            <h2 id="wizard-title">How It Works</h2>
-            <p className="section-intro">Simple onboarding in five clear steps—built for busy agents.</p>
+          <div className="container wizard-shell">
+            <h2 id="wizard-title">How it works</h2>
+            <p className="section-intro wizard-intro">
+              A simple onboarding flow designed to get your real estate website live without friction.
+            </p>
+
+            <div className="wizard-visual" aria-hidden="true">
+              <span className="wizard-line" />
+              {steps.map((step, idx) => (
+                <article key={step.title} className="wizard-visual-card">
+                  <div className="wizard-glyph">{step.glyph}</div>
+                  <span className="wizard-dot">{idx + 1}</span>
+                </article>
+              ))}
+            </div>
+
             <ol className="wizard-steps">
-              {steps.map(([title, description], idx) => (
-                <li key={title}>
-                  <span className="step-number">{idx + 1}</span>
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{description}</p>
-                  </div>
+              {steps.map((step) => (
+                <li key={step.title}>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
                 </li>
               ))}
             </ol>
@@ -197,6 +208,15 @@ export default function HomePage() {
       <footer className="site-footer">
         <div className="container footer-wrap">
           <small>© {new Date().getFullYear()} AgentLaunch. All rights reserved.</small>
+          <button
+            id="theme-toggle"
+            className="theme-toggle theme-toggle-footer"
+            type="button"
+            aria-label="Toggle light and dark mode"
+            onClick={toggleTheme}
+          >
+            {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
+          </button>
         </div>
       </footer>
     </>
