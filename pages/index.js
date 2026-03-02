@@ -6,7 +6,7 @@ const PRICE = 50;
 const steps = [
   {
     title: 'Sign Up',
-    description: 'Create your account and choose the package that fits your real estate business goals.',
+    description: 'Create your free account to begin building your custom real estate website. No payment required to start — explore the platform risk-free while setting up your online presence.',
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="8" r="3.5" />
@@ -16,7 +16,7 @@ const steps = [
   },
   {
     title: 'Provide Information',
-    description: 'Enter your brokerage details, market focus, and brand voice so your content is tailored.',
+    description: 'Enter your brokerage details, service areas, specialties, and brand preferences so your website is tailored to your real estate business and local market.',
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M6 5h12M6 10h12M6 15h8M4 5h.01M4 10h.01M4 15h.01" />
@@ -25,7 +25,7 @@ const steps = [
   },
   {
     title: 'Submit Listing Data',
-    description: 'Upload property photos, descriptions, and listing specifics in one guided flow.',
+    description: 'Upload property listings, photos, and descriptions through a simple guided workflow. We automatically structure your content for optimized property pages and search visibility.',
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 15V5m0 0 4 4m-4-4-4 4M5 16v3h14v-3" />
@@ -34,7 +34,7 @@ const steps = [
   },
   {
     title: 'Preview',
-    description: 'Review your generated site and listing pages before publishing to ensure everything looks right.',
+    description: 'Review your fully generated real estate website before publishing. Explore your pages, test your listings, and make sure everything looks exactly how you want.',
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12Z" />
@@ -43,8 +43,8 @@ const steps = [
     ),
   },
   {
-    title: 'Publish',
-    description: 'Go live and start capturing qualified buyer and seller leads from a polished online presence.',
+    title: 'Publish & Activate',
+    description: 'When you're ready to launch, choose your plan and publish your site instantly. Start capturing buyer and seller leads with a polished, SEO-optimized real estate website.',
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M4 12h16M13 6l7 6-7 6" />
@@ -138,9 +138,9 @@ export default function HomePage() {
 
         <section className="wizard" id="how-it-works" aria-labelledby="wizard-title">
           <div className="container wizard-shell">
-            <h2 id="wizard-title">How it works</h2>
+            <h2 id="wizard-title">How It Works</h2>
             <p className="section-intro wizard-intro">
-              A visually guided, done-for-you launch process designed to move from setup to publish without friction.
+              Launch your professional real estate website in minutes with a guided, done-for-you setup — from account creation to publishing your fully branded agent website.
             </p>
 
             <ol className="wizard-flow" aria-label="Five-step onboarding flow">
