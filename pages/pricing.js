@@ -66,7 +66,7 @@ export default function PricingPage() {
             </a>
 
             <nav className="main-nav" aria-label="Primary">
-              <a href="/#how-it-works">How It Works</a>
+              <a href="/how-it-works">How It Works</a>
               <a href="/pricing" aria-current="page">
                 Pricing
               </a>

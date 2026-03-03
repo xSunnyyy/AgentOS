@@ -115,7 +115,7 @@ export default function HomePage() {
           </a>
 
           <nav className="main-nav" aria-label="Primary">
-            <a href="#how-it-works">How It Works</a>
+            <a href="/how-it-works">How It Works</a>
             <a href="/pricing">Pricing</a>
             <a href="#contact">Contact</a>
           </nav>
@@ -143,7 +143,7 @@ export default function HomePage() {
                 <a className="btn btn-primary btn-lg" href="#contact">
                   Start Building Free
                 </a>
-                <a className="btn btn-secondary btn-lg" href="#how-it-works">
+                <a className="btn btn-secondary btn-lg" href="/how-it-works">
                   View Live Demo
                 </a>
               </div>
