@@ -528,6 +528,17 @@ html[data-theme='dark'] .hero-image-wrap {
   }
 }
 
+
+.pricing-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-layout main {
+  flex: 1;
+}
+
 .pricing-page {
   padding: clamp(48px, 6vw, 84px) 0;
 }
