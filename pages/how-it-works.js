@@ -28,6 +28,24 @@ const timelineSteps = [
   },
 ];
 
+const faqPreviewItems = [
+  {
+    question: 'How long does it take to launch my real estate agent website?',
+    answer:
+      'Most agents can launch their real estate website in 1–3 days. Our guided platform walks you through setup step-by-step, so you can build and publish a professional, SEO-optimized real estate agent website without waiting weeks for a developer.',
+  },
+  {
+    question: 'Do I need technical skills or coding experience?',
+    answer:
+      'No. Our real estate website platform is designed specifically for Realtors who want to build a real estate website without coding. Everything is structured through a simple dashboard — just enter your information, add listings, and publish.',
+  },
+  {
+    question: 'Is the website optimized for SEO?',
+    answer:
+      'Yes. Every website is built using SEO best practices for Realtors, including clean page structure, optimized property pages, fast load speeds, and mobile responsiveness. This helps improve visibility on Google and supports long-term lead generation.',
+  },
+];
+
 export default function HowItWorksPage() {
   return (
     <>
@@ -102,8 +120,25 @@ export default function HowItWorksPage() {
 
           <section className="faq-placeholder" aria-labelledby="faq-title">
             <div className="container faq-shell">
-              <h2 id="faq-title">FAQ</h2>
-              <p className="section-intro">Questions and answers coming soon. Share your FAQs and I’ll drop them in here.</p>
+              <h2 id="faq-title">Frequently Asked Questions</h2>
+              <p className="section-intro">Everything agents ask before launching with AgentOS.</p>
+
+              <div className="faq-list">
+                {faqPreviewItems.map((item, index) => (
+                  <details key={item.question} className="faq-item">
+                    <summary>
+                      <span>
+                        {index + 1}. {item.question}
+                      </span>
+                    </summary>
+                    <p>{item.answer}</p>
+                  </details>
+                ))}
+              </div>
+
+              <a className="btn btn-secondary faq-view-all" href="/faqs">
+                View All FAQs
+              </a>
             </div>
           </section>
         </main>
