@@ -58,11 +58,11 @@ export default function PricingPage() {
               </div>
             </details>
             <a href="/pricing">Pricing</a>
-            <a href="/#contact">Contact</a>
+            <a href="/contact">Contact</a>
           </nav>
 
             <div className="nav-actions">
-              <a className="btn btn-primary" href="/#contact">
+              <a className="btn btn-primary" href="/contact">
                 Start Building Free
               </a>
             </div>
@@ -97,7 +97,7 @@ export default function PricingPage() {
                       ))}
                     </ul>
 
-                    <a className={`btn ${plan.featured ? 'btn-primary' : 'btn-secondary'}`} href="/#contact">
+                    <a className={`btn ${plan.featured ? 'btn-primary' : 'btn-secondary'}`} href="/contact">
                       {plan.cta}
                     </a>
                   </article>

@@ -79,7 +79,7 @@ export default function HowItWorksPage() {
               </div>
             </details>
             <a href="/pricing">Pricing</a>
-            <a href="/#contact">Contact</a>
+            <a href="/contact">Contact</a>
           </nav>
 
             <div className="nav-actions">

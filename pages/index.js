@@ -107,7 +107,7 @@ export default function HomePage() {
               </div>
             </details>
             <a href="/pricing">Pricing</a>
-            <a href="/#contact">Contact</a>
+            <a href="/contact">Contact</a>
           </nav>
 
           <div className="nav-actions">
@@ -130,7 +130,7 @@ export default function HomePage() {
                 business — no developer required.
               </p>
               <div className="hero-actions">
-                <a className="btn btn-primary btn-lg" href="#contact">
+                <a className="btn btn-primary btn-lg" href="/contact">
                   Start Building Free
                 </a>
                 <a className="btn btn-secondary btn-lg" href="/how-it-works">
