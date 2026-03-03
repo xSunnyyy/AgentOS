@@ -64,7 +64,7 @@ const softwareSchema = {
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
   description:
-    'SEO-first real estate agent website builder for IDX listings and lead generation with a guided done-for-you setup.',
+    'SEO-first real estate agent website builder for Your listings and lead generation with a guided done-for-you setup.',
   offers: {
     '@type': 'Offer',
     price: '0',
@@ -80,7 +80,7 @@ export default function HomePage() {
         <title>Real Estate Agent Website Builder | SEO & IDX</title>
         <meta
           name="description"
-          content="Launch a fully branded MLS-ready real estate agent website builder designed for local SEO, IDX listings, and lead generation."
+          content="Launch a fully branded MLS-ready real estate agent website builder designed for local SEO, Your listings, and lead generation."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
