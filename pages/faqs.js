@@ -2,6 +2,21 @@ import Head from 'next/head';
 
 const allFaqItems = [
   {
+    question: 'How long does it take to launch my real estate agent website?',
+    answer:
+      'Most agents can launch their real estate website in 1–3 days. Our guided platform walks you through setup step-by-step, so you can build and publish a professional, SEO-optimized real estate agent website without waiting weeks for a developer.',
+  },
+  {
+    question: 'Do I need technical skills or coding experience?',
+    answer:
+      'No. Our real estate website platform is designed specifically for Realtors who want to build a real estate website without coding. Everything is structured through a simple dashboard — just enter your information, add listings, and publish.',
+  },
+  {
+    question: 'Is the website optimized for SEO?',
+    answer:
+      'Yes. Every website is built using SEO best practices for Realtors, including clean page structure, optimized property pages, fast load speeds, and mobile responsiveness. This helps improve visibility on Google and supports long-term lead generation.',
+  },
+  {
     question: 'Will my website work on mobile devices?',
     answer:
       'Yes. Every real estate website we generate is fully mobile responsive, ensuring buyers and sellers have a seamless experience across desktop, tablet, and smartphone devices.',
@@ -58,31 +73,55 @@ export default function FaqsPage() {
         Skip to content
       </a>
 
-      <main id="main-content" className="all-faq-page">
-        <section className="all-faq-section" aria-labelledby="all-faq-title">
-          <div className="container all-faq-shell">
-            <h1 id="all-faq-title">All Frequently Asked Questions</h1>
-            <p className="section-intro">Explore the full list of AgentOS FAQ answers for real estate agents.</p>
-
-            <div className="faq-list">
-              {allFaqItems.map((item, index) => (
-                <details key={item.question} className="faq-item">
-                  <summary>
-                    <span>
-                      {index + 1}. {item.question}
-                    </span>
-                  </summary>
-                  <p>{item.answer}</p>
-                </details>
-              ))}
-            </div>
-
-            <a className="btn btn-secondary" href="/how-it-works">
-              Back to How It Works
+      <div className="pricing-layout">
+        <header className="site-header">
+          <div className="container nav-wrap">
+            <a className="brand" href="/" aria-label="Homepage">
+              AgentOS
             </a>
+
+            <nav className="main-nav" aria-label="Primary">
+              <a href="/how-it-works">How It Works</a>
+              <a href="/pricing">Pricing</a>
+              <a href="/#contact">Contact</a>
+            </nav>
+
+            <div className="nav-actions">
+              <a className="btn btn-primary" href="/pricing">
+                Start Building Free
+              </a>
+            </div>
           </div>
-        </section>
-      </main>
+        </header>
+
+        <main id="main-content" className="all-faq-page">
+          <section className="all-faq-section" aria-labelledby="all-faq-title">
+            <div className="container all-faq-shell">
+              <h1 id="all-faq-title">All Frequently Asked Questions</h1>
+              <p className="section-intro">Explore the full list of AgentOS FAQ answers for real estate agents.</p>
+
+              <div className="faq-list">
+                {allFaqItems.map((item, index) => (
+                  <details key={item.question} className="faq-item">
+                    <summary>
+                      <span>
+                        {index + 1}. {item.question}
+                      </span>
+                    </summary>
+                    <p>{item.answer}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer className="site-footer">
+          <div className="container footer-wrap">
+            <small>© {new Date().getFullYear()} AgentOS. All rights reserved.</small>
+          </div>
+        </footer>
+      </div>
     </>
   );
 }
