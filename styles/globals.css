@@ -1104,6 +1104,13 @@ textarea {
   justify-self: center;
 }
 
+/* Homepage uses contact-page-form styles but should span full section width. */
+.contact-page-form.home-contact-form {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
 @media (max-width: 900px) {
   .contact-page-copy h1,
   .contact-page-copy p {
