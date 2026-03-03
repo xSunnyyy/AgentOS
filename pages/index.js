@@ -180,18 +180,45 @@ export default function HomePage() {
               your business.
             </p>
 
-            <form className="contact-form" action="#" method="post">
-              <label htmlFor="name">Name</label>
-              <input id="name" name="name" type="text" autoComplete="name" required />
+            <form className="contact-page-form home-contact-form" action="#" method="post">
+              <label htmlFor="home-inquiry-type">What can we help you with?</label>
+              <select id="home-inquiry-type" name="inquiry-type" defaultValue="" required>
+                <option value="" disabled>
+                  Select an inquiry type
+                </option>
+                <option value="pricing">Pricing questions</option>
+                <option value="features">Platform features</option>
+                <option value="support">Technical support</option>
+                <option value="domain">Custom domain setup</option>
+                <option value="partnership">Partnership inquiry</option>
+              </select>
 
-              <label htmlFor="email">Email</label>
-              <input id="email" name="email" type="email" autoComplete="email" required />
+              <label htmlFor="home-full-name">Full Name</label>
+              <input id="home-full-name" name="full-name" type="text" autoComplete="name" required />
 
-              <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" rows="5" required />
+              <label htmlFor="home-email">Email</label>
+              <input id="home-email" name="email" type="email" autoComplete="email" required />
+
+              <label htmlFor="home-brokerage-name">Brokerage Name</label>
+              <input id="home-brokerage-name" name="brokerage-name" type="text" autoComplete="organization" />
+
+              <label htmlFor="home-website">Website (if existing)</label>
+              <input id="home-website" name="website" type="url" placeholder="https://" />
+
+              <label htmlFor="home-stage">What stage are you in?</label>
+              <select id="home-stage" name="stage" defaultValue="" required>
+                <option value="" disabled>
+                  Select your stage
+                </option>
+                <option value="researching">Just researching</option>
+                <option value="ready">Ready to launch</option>
+                <option value="switching">Switching from another platform</option>
+              </select>
+
+              <p className="contact-microcopy">We respond to most inquiries within one business day.</p>
 
               <button className="btn btn-primary" type="submit">
-                Send Message
+                Send Inquiry
               </button>
             </form>
           </div>
