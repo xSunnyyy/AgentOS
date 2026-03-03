@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const timelineSteps = [
   {
@@ -30,21 +30,6 @@ const timelineSteps = [
 ];
 
 export default function HowItWorksPage() {
-  const [theme, setTheme] = useState('light');
-
-  useEffect(() => {
-    const storedTheme = window.localStorage.getItem('theme');
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = storedTheme || (systemDark ? 'dark' : 'light');
-    setTheme(initialTheme);
-    document.documentElement.dataset.theme = initialTheme;
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem('theme', theme);
-  }, [theme]);
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -64,8 +49,6 @@ export default function HowItWorksPage() {
       observer.disconnect();
     };
   }, []);
-
-  const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
 
   return (
     <>
@@ -144,15 +127,6 @@ export default function HowItWorksPage() {
         <footer className="site-footer">
           <div className="container footer-wrap">
             <small>© {new Date().getFullYear()} AgentOS. All rights reserved.</small>
-            <button
-              id="theme-toggle"
-              className="theme-toggle theme-toggle-footer"
-              type="button"
-              aria-label="Toggle light and dark mode"
-              onClick={toggleTheme}
-            >
-              {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
-            </button>
           </div>
         </footer>
       </div>
