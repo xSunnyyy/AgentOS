@@ -141,10 +141,10 @@ export default function HomePage() {
               </p>
               <div className="hero-actions">
                 <a className="btn btn-primary btn-lg" href="#contact">
-                  🚀 Start Building Free
+                  Start Building Free
                 </a>
                 <a className="btn btn-secondary btn-lg" href="#how-it-works">
-                  ▶ View Live Demo
+                  View Live Demo
                 </a>
               </div>
             </div>
