@@ -657,14 +657,43 @@ html[data-theme='dark'] .hero-image-wrap {
   }
 }
 
+
 .how-page {
   padding: clamp(44px, 6vw, 84px) 0 30px;
+}
+
+.how-wrap {
+  position: relative;
+  border-radius: 26px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(900px 520px at 50% 10%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 62%),
+    radial-gradient(760px 480px at 50% 98%, color-mix(in oklab, var(--primary) 10%, transparent), transparent 70%),
+    color-mix(in oklab, var(--surface) 82%, transparent);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+  padding: clamp(1.1rem, 3.2vw, 2.4rem);
+}
+
+.how-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(90deg, color-mix(in oklab, var(--stroke) 60%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in oklab, var(--stroke) 50%, transparent) 1px, transparent 1px);
+  background-size: 36px 36px;
 }
 
 .how-heading {
   text-align: center;
   max-width: 860px;
   margin: 0 auto 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .how-heading h1 {
@@ -680,36 +709,101 @@ html[data-theme='dark'] .hero-image-wrap {
   font-size: clamp(1rem, 1.4vw, 1.15rem);
 }
 
-.flow-row {
+.timeline-kicker {
+  margin-top: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.timeline-progress {
+  margin: 1rem auto 0;
+  width: min(760px, 100%);
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid var(--stroke);
+  background: color-mix(in oklab, var(--surface) 76%, transparent);
+  overflow: hidden;
+}
+
+.timeline-progress span {
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+  box-shadow: 0 8px 18px color-mix(in oklab, var(--primary) 35%, transparent);
+  transition: width 0.18s linear;
+}
+
+.timeline {
+  position: relative;
+  z-index: 1;
+  max-width: 1060px;
+  margin: 0 auto;
   display: grid;
-  justify-content: center;
-  gap: 0.9rem;
-  margin-top: 1rem;
+  gap: 1.1rem;
 }
 
-.row-two {
-  grid-template-columns: repeat(2, minmax(300px, 440px));
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, color-mix(in oklab, var(--primary) 40%, transparent), color-mix(in oklab, var(--primary) 16%, transparent));
 }
 
-.row-three {
-  grid-template-columns: repeat(3, minmax(250px, 1fr));
-  margin-top: 1.1rem;
-}
-
-.flow-item {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-}
-
-.flow-card {
-  background: linear-gradient(145deg, color-mix(in oklab, var(--surface) 86%, transparent), color-mix(in oklab, var(--surface) 62%, transparent));
+.timeline-card {
+  width: calc(50% - 2rem);
+  position: relative;
   border: 1px solid var(--border);
   border-radius: 20px;
+  padding: 1rem 1rem 1rem 1.1rem;
+  background: linear-gradient(145deg, color-mix(in oklab, var(--surface) 86%, transparent), color-mix(in oklab, var(--surface) 62%, transparent));
   box-shadow: var(--shadow-soft);
   backdrop-filter: blur(12px);
-  padding: 1rem;
-  flex: 1;
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.timeline-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-left {
+  margin-right: auto;
+}
+
+.card-right {
+  margin-left: auto;
+}
+
+.timeline-dot {
+  position: absolute;
+  top: 1rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in oklab, var(--primary) 54%, var(--stroke));
+  background: linear-gradient(135deg, color-mix(in oklab, var(--primary) 22%, #fff), color-mix(in oklab, var(--primary) 42%, #fff));
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 14px 28px color-mix(in oklab, var(--primary) 26%, transparent);
+}
+
+.card-left .timeline-dot {
+  right: -3.5rem;
+}
+
+.card-right .timeline-dot {
+  left: -3.5rem;
 }
 
 .flow-step {
@@ -722,20 +816,15 @@ html[data-theme='dark'] .hero-image-wrap {
   font-size: 0.78rem;
 }
 
-.flow-card h2 {
+.timeline-card h2 {
   margin: 0;
-  font-size: 1.3rem;
+  font-size: 1.28rem;
+  max-width: 28ch;
 }
 
-.flow-card p {
+.timeline-card p {
   margin: 0.58rem 0 0;
   color: var(--muted);
-}
-
-.flow-arrow {
-  font-size: 1.35rem;
-  color: var(--primary);
-  font-weight: 800;
 }
 
 .faq-placeholder {
@@ -751,17 +840,21 @@ html[data-theme='dark'] .hero-image-wrap {
   padding: 1.25rem;
 }
 
-@media (max-width: 1100px) {
-  .row-two,
-  .row-three {
-    grid-template-columns: 1fr;
+@media (max-width: 980px) {
+  .timeline::before {
+    left: 24px;
+    transform: none;
   }
 
-  .flow-item {
-    justify-content: center;
+  .timeline-card {
+    width: 100%;
+    margin: 0;
+    padding-left: 4rem;
   }
 
-  .flow-arrow {
-    display: none;
+  .card-left .timeline-dot,
+  .card-right .timeline-dot {
+    left: -1px;
+    right: auto;
   }
 }

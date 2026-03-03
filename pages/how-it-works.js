@@ -1,42 +1,37 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
-const detailedSteps = [
+const timelineSteps = [
   {
-    number: 'Step 1',
-    title: 'Sign Up',
+    title: 'Create Your Real Estate Agent Website Account',
     description:
-      'Create your free account to begin building your custom real estate website. No payment required to start — explore the platform risk-free while setting up your online presence.',
-    note: 'No credit card required',
+      'Start building your real estate agent website in minutes — no coding or technical setup required. Create your account and access a guided platform designed specifically for Realtors who want a professional online presence without hiring a developer. Launch confidently with a system built for simplicity and speed.',
   },
   {
-    number: 'Step 2',
-    title: 'Provide Information',
+    title: 'Customize Your Real Estate Website Platform',
     description:
-      'Enter your brokerage details, service areas, specialties, and brand preferences so your website is tailored to your real estate business and local market.',
+      'Enter your branding, brokerage information, service areas, and specialties to tailor your real estate website to your local market. Our platform automatically structures your content using SEO best practices for Realtors, helping position you for better search visibility from day one.',
   },
   {
-    number: 'Step 3',
-    title: 'Submit Listing Data',
+    title: 'Add Listings & Power Your IDX Real Estate Website',
     description:
-      'Upload property listings, photos, and descriptions through a simple guided workflow. We automatically structure your content for optimized property pages and search visibility.',
+      'Upload property listings, photos, and descriptions through a streamlined workflow. Your listings are structured into optimized property pages designed to support lead generation for real estate agents and improve search performance across Google and mobile devices.',
   },
   {
-    number: 'Step 4',
-    title: 'Preview',
+    title: 'Preview Your Mobile-Responsive Real Estate Website',
     description:
-      'Review your fully generated real estate website before publishing. Explore your pages, test your listings, and make sure everything looks exactly how you want.',
+      'Before you launch, review your fully generated website across desktop and mobile. Every real estate website is built to be fast, modern, and mobile responsive — ensuring buyers and sellers have a seamless experience no matter how they find you.',
   },
   {
-    number: 'Step 5',
-    title: 'Publish & Activate',
+    title: 'Launch Your SEO-Optimized Real Estate Agent Website',
     description:
-      "When you're ready to launch, choose your plan and publish your site instantly. Start capturing buyer and seller leads with a polished, SEO-optimized real estate website.",
+      'Publish your website instantly and start capturing buyer and seller leads. Your real estate agent website goes live with built-in SEO structure, clean page hierarchy, and performance optimization — so you can focus on selling homes while your website works for you.',
   },
 ];
 
 export default function HowItWorksPage() {
   const [theme, setTheme] = useState('light');
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem('theme');
@@ -51,6 +46,42 @@ export default function HowItWorksPage() {
     window.localStorage.setItem('theme', theme);
   }, [theme]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const timeline = document.getElementById('timeline');
+      if (!timeline) return;
+
+      const rect = timeline.getBoundingClientRect();
+      const viewportHeight = window.innerHeight || 1;
+      const total = rect.height + viewportHeight;
+      const seen = viewportHeight - rect.top;
+      const progress = Math.min(100, Math.max(0, (seen / total) * 100));
+      setScrollProgress(progress);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const cards = document.querySelectorAll('.timeline-card');
+    cards.forEach((card) => observer.observe(card));
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
 
   return (
@@ -59,7 +90,7 @@ export default function HowItWorksPage() {
         <title>How It Works | AgentOS</title>
         <meta
           name="description"
-          content="Learn how AgentOS helps real estate agents launch a fully optimized website in days with a simple five-step process."
+          content="Follow a five-step path to launch your SEO-optimized real estate website with AgentOS in as little as 48-72 hours."
         />
       </Head>
 
@@ -92,38 +123,32 @@ export default function HowItWorksPage() {
 
         <main id="main-content">
           <section className="how-page" aria-labelledby="how-title">
-            <div className="container">
+            <div className="container how-wrap">
               <div className="how-heading">
                 <h1 id="how-title">How Our Real Estate Agent Website Platform Works</h1>
                 <p>
                   A step-by-step guide to launching a fully optimized real estate website in days — no coding required.
                 </p>
+                <p className="timeline-kicker">From Signup to Live Website in 48–72 Hours</p>
+                <div className="timeline-progress" role="presentation" aria-hidden="true">
+                  <span style={{ width: `${scrollProgress}%` }} />
+                </div>
               </div>
 
-              <div className="flow-row row-two">
-                {[detailedSteps[0], detailedSteps[1]].map((step, index) => (
-                  <div key={step.number} className="flow-item">
-                    <article className="flow-card">
-                      <span className="flow-step">{step.number}</span>
-                      <h2>{step.title}</h2>
-                      <p>{step.description}</p>
-                      {step.note && <p className="step-note">{step.note}</p>}
-                    </article>
-                    {index === 0 && <span className="flow-arrow" aria-hidden="true">→</span>}
-                  </div>
-                ))}
-              </div>
-
-              <div className="flow-row row-three">
-                {[detailedSteps[2], detailedSteps[3], detailedSteps[4]].map((step, index) => (
-                  <div key={step.number} className="flow-item">
-                    <article className="flow-card">
-                      <span className="flow-step">{step.number}</span>
-                      <h2>{step.title}</h2>
-                      <p>{step.description}</p>
-                    </article>
-                    {index < 2 && <span className="flow-arrow" aria-hidden="true">→</span>}
-                  </div>
+              <div className="timeline" id="timeline">
+                {timelineSteps.map((step, index) => (
+                  <article
+                    key={step.title}
+                    className={`timeline-card ${index % 2 === 0 ? 'card-left' : 'card-right'}`}
+                    aria-labelledby={`step-title-${index + 1}`}
+                  >
+                    <span className="timeline-dot" aria-hidden="true">
+                      {index + 1}
+                    </span>
+                    <span className="flow-step">Step {index + 1}</span>
+                    <h2 id={`step-title-${index + 1}`}>{step.title}</h2>
+                    <p>{step.description}</p>
+                  </article>
                 ))}
               </div>
             </div>
