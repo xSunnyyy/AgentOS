@@ -1263,10 +1263,11 @@ textarea {
 }
 
 .profile-item {
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: #fff;
-  padding: 0.95rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 0 0.95rem;
 }
 
 .profile-item h3 {
@@ -1279,6 +1280,7 @@ textarea {
 
 .description-item {
   min-height: 100%;
+  padding-left: 0.5rem;
 }
 
 .description-content {
@@ -1296,6 +1298,19 @@ textarea {
   margin-top: 1.5rem;
 }
 
+section[aria-labelledby="properties-for-sale"],
+section[aria-labelledby="sold-properties"] {
+  margin-top: 1.25rem;
+  background: #012a5b;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+section[aria-labelledby="properties-for-sale"] h2,
+section[aria-labelledby="sold-properties"] h2 {
+  color: #fff;
+}
+
 .property-heading-row {
   display: flex;
   justify-content: space-between;
@@ -1308,53 +1323,87 @@ textarea {
   gap: 0.45rem;
 }
 
+.property-heading-row .media-arrow {
+  background: rgba(255, 255, 255, 0.95);
+}
+
 .property-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.8rem;
+  gap: 1rem;
 }
 
-.property-card {
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 0.9rem;
-  background: #fff;
+.listing-card {
+  background: #f3f4f6;
+  border: none;
+  padding: 0;
+  overflow: hidden;
+}
+
+.property-image-wrap {
+  position: relative;
 }
 
 .property-image {
   width: 100%;
-  height: 165px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
+  height: 240px;
+  border: 0;
   object-fit: cover;
-  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.listing-status {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  background: #032a59;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  padding: 0.4rem 0.75rem;
 }
 
 .property-image-fallback {
   display: grid;
   place-items: center;
-  background: #f1f5ff;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.property-card h3 {
-  margin-top: 0;
-  font-size: 1rem;
-}
-
-.property-price {
-  margin: 0.3rem 0;
+  background: linear-gradient(145deg, #d9e4f8, #b7c9ec);
+  color: #11396d;
   font-weight: 700;
 }
 
-.property-meta {
-  margin: 0;
-  color: var(--muted);
+.property-details {
+  padding: 1rem 1.1rem 1.2rem;
 }
 
-.property-card.sold {
-  background: #f8fbff;
+.property-details h3 {
+  margin: 0;
+  color: #0b2f5f;
+  font-size: clamp(1.1rem, 1.8vw, 1.55rem);
+  line-height: 1.3;
+}
+
+.property-spec-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.property-spec-grid span {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #64748b;
+  margin-bottom: 0.2rem;
+}
+
+.property-spec-grid strong {
+  color: #0b2f5f;
+  font-size: 1.1rem;
+  line-height: 1.2;
 }
 
 .testimonial-grid {
@@ -1422,6 +1471,10 @@ textarea {
   .property-heading-row {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .property-spec-grid {
+    grid-template-columns: 1fr;
   }
 }
 

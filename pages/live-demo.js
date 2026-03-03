@@ -28,30 +28,30 @@ const saleProperties = [
   {
     address: '742 Glenview Lane, Austin, TX',
     price: '$1,150,000',
-    beds: '4 Bed',
-    baths: '3 Bath',
+    beds: '4',
+    baths: '3 Full',
     image: 'https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?auto=format&fit=crop&w=1000&q=80',
   },
   {
     address: '88 Ocean Crest Blvd, San Diego, CA',
     price: '$2,080,000',
-    beds: '5 Bed',
-    baths: '4 Bath',
+    beds: '5',
+    baths: '4 Full',
     image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1000&q=80',
   },
-  { address: '619 Maple Grove Dr, Nashville, TN', price: '$815,000', beds: '3 Bed', baths: '2 Bath', image: null },
+  { address: '619 Maple Grove Dr, Nashville, TN', price: '$815,000', beds: '3', baths: '2 Full', image: null },
   {
     address: '37 Cedar Ridge Way, Charlotte, NC',
     price: '$699,000',
-    beds: '4 Bed',
-    baths: '2.5 Bath',
+    beds: '4',
+    baths: '2 Full 1 Partial',
     image: 'https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?auto=format&fit=crop&w=1000&q=80',
   },
   {
     address: '415 Summit View Rd, Denver, CO',
     price: '$1,320,000',
-    beds: '4 Bed',
-    baths: '3.5 Bath',
+    beds: '4',
+    baths: '3 Full 1 Partial',
     image: 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1000&q=80',
   },
 ];
@@ -60,25 +60,33 @@ const soldProperties = [
   {
     address: '101 Harbor Point, Seattle, WA',
     price: '$1,440,000',
+    beds: '4',
+    baths: '3 Full',
     closed: 'Closed in 14 days',
     image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=80',
   },
-  { address: '34 Canyon Oak Ct, Phoenix, AZ', price: '$972,000', closed: 'Closed over asking', image: null },
+  { address: '34 Canyon Oak Ct, Phoenix, AZ', price: '$972,000', beds: '3', baths: '2 Full 1 Partial', closed: 'Closed over asking', image: null },
   {
     address: '502 Magnolia Ave, Atlanta, GA',
     price: '$764,000',
+    beds: '3',
+    baths: '2 Full',
     closed: 'Closed in 9 days',
     image: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1000&q=80',
   },
   {
     address: '209 Lakefront Dr, Orlando, FL',
     price: '$1,025,000',
+    beds: '5',
+    baths: '4 Full 1 Partial',
     closed: 'Closed cash offer',
     image: 'https://images.unsplash.com/photo-1600607687641-62f0f36d9f0f?auto=format&fit=crop&w=1000&q=80',
   },
   {
     address: '66 Pine Terrace, Portland, OR',
     price: '$689,000',
+    beds: '4',
+    baths: '3 Full',
     closed: 'Closed in 12 days',
     image: 'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=1000&q=80',
   },
@@ -276,15 +284,32 @@ export default function LiveDemoPage() {
               </div>
               <div className="property-cards-grid" role="region" aria-label="Properties currently for sale">
                 {getVisibleProperties(saleProperties, saleStartIndex).map((property) => (
-                  <article key={`${property.address}-sale`} className="property-card">
-                    {property.image ? (
-                      <img className="property-image" src={property.image} alt={`Property at ${property.address}`} />
-                    ) : (
-                      <div className="property-image property-image-fallback">No Images Avaliable</div>
-                    )}
-                    <h3>{property.address}</h3>
-                    <p className="property-price">{property.price}</p>
-                    <p className="property-meta">{property.beds} • {property.baths}</p>
+                  <article key={`${property.address}-sale`} className="property-card listing-card active-listing">
+                    <div className="property-image-wrap">
+                      {property.image ? (
+                        <img className="property-image" src={property.image} alt={`Property at ${property.address}`} />
+                      ) : (
+                        <div className="property-image property-image-fallback">No Images Avaliable</div>
+                      )}
+                      <span className="listing-status">For Sale</span>
+                    </div>
+                    <div className="property-details">
+                      <h3>{property.address}</h3>
+                      <div className="property-spec-grid">
+                        <div>
+                          <span>Price</span>
+                          <strong>{property.price}</strong>
+                        </div>
+                        <div>
+                          <span>Bedrooms</span>
+                          <strong>{property.beds}</strong>
+                        </div>
+                        <div>
+                          <span>Bathrooms</span>
+                          <strong>{property.baths}</strong>
+                        </div>
+                      </div>
+                    </div>
                   </article>
                 ))}
               </div>
@@ -300,15 +325,32 @@ export default function LiveDemoPage() {
               </div>
               <div className="property-cards-grid" role="region" aria-label="Recently sold properties">
                 {getVisibleProperties(soldProperties, soldStartIndex).map((property) => (
-                  <article key={`${property.address}-sold`} className="property-card sold">
-                    {property.image ? (
-                      <img className="property-image" src={property.image} alt={`Sold property at ${property.address}`} />
-                    ) : (
-                      <div className="property-image property-image-fallback">No Images Avaliable</div>
-                    )}
-                    <h3>{property.address}</h3>
-                    <p className="property-price">{property.price}</p>
-                    <p className="property-meta">{property.closed}</p>
+                  <article key={`${property.address}-sold`} className="property-card listing-card sold-listing">
+                    <div className="property-image-wrap">
+                      {property.image ? (
+                        <img className="property-image" src={property.image} alt={`Sold property at ${property.address}`} />
+                      ) : (
+                        <div className="property-image property-image-fallback">No Images Avaliable</div>
+                      )}
+                      <span className="listing-status">Sold</span>
+                    </div>
+                    <div className="property-details">
+                      <h3>{property.address}</h3>
+                      <div className="property-spec-grid">
+                        <div>
+                          <span>Price</span>
+                          <strong>{property.price}</strong>
+                        </div>
+                        <div>
+                          <span>Bedrooms</span>
+                          <strong>{property.beds}</strong>
+                        </div>
+                        <div>
+                          <span>Bathrooms</span>
+                          <strong>{property.baths}</strong>
+                        </div>
+                      </div>
+                    </div>
                   </article>
                 ))}
               </div>
