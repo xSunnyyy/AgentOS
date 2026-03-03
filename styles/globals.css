@@ -77,13 +77,13 @@ body { line-height: 1.55; }
   position: relative;
   z-index: 10;
   border-bottom: 1px solid var(--stroke);
-  background: color-mix(in oklab, var(--bg) 70%, transparent);
-  backdrop-filter: blur(8px);
+  background: var(--surface);
+  box-shadow: inset 0 -1px 0 var(--stroke);
 }
 
 html[data-theme='dark'] .site-header {
-  background: color-mix(in oklab, var(--bg) 62%, transparent);
-  box-shadow: 0 14px 40px rgba(8, 15, 36, 0.45);
+  background: rgba(16, 28, 56, 0.82);
+  box-shadow: inset 0 -1px 0 var(--stroke), 0 10px 28px rgba(8, 15, 36, 0.35);
 }
 
 
