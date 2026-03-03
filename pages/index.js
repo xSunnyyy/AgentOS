@@ -139,7 +139,7 @@ export default function HomePage() {
                 buyers and sellers into qualified leads. Publish in minutes, edit anytime, and grow your real estate
                 business — no developer required.
               </p>
-              <div className="hero-actions hero-cta-stack">
+              <div className="hero-actions">
                 <a className="btn btn-primary btn-lg" href="#contact">
                   🚀 Start Building Free
                 </a>
@@ -147,13 +147,6 @@ export default function HomePage() {
                   ▶ View Live Demo
                 </a>
               </div>
-              <p className="cta-helper">No credit card required</p>
-              <ul className="hero-trust" aria-label="Trust indicators">
-                <li>✔ Preview before you pay</li>
-                <li>✔ Built for agents & brokers</li>
-                <li>✔ SEO-optimized pages included</li>
-              </ul>
-              <p className="hero-momentum">Build your website. Preview it. Launch when you’re ready.</p>
             </div>
 
             <div className="hero-image-wrap">
@@ -181,6 +174,7 @@ export default function HomePage() {
                   <span className="step-pill">Step {index + 1}</span>
                   <h3>{step.title}</h3>
                   <p>{step.description}</p>
+                  {index === 0 && <p className="step-note">No credit card required</p>}
                 </li>
               ))}
             </ol>
