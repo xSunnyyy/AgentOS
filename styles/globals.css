@@ -385,7 +385,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.65rem;
 }
 
 
@@ -1295,20 +1295,13 @@ textarea {
 }
 
 .section-heading-row {
-  margin-top: 1.5rem;
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
 }
 
 section[aria-labelledby="properties-for-sale"],
 section[aria-labelledby="sold-properties"] {
   margin-top: 1.25rem;
-  background: #012a5b;
-  border-radius: 12px;
-  padding: 1rem;
-}
-
-section[aria-labelledby="properties-for-sale"] h2,
-section[aria-labelledby="sold-properties"] h2 {
-  color: #fff;
 }
 
 .property-heading-row {
@@ -1316,6 +1309,7 @@ section[aria-labelledby="sold-properties"] h2 {
   justify-content: space-between;
   align-items: center;
   gap: 0.6rem;
+  margin-bottom: 0.6rem;
 }
 
 .inline-arrows {
@@ -1324,18 +1318,19 @@ section[aria-labelledby="sold-properties"] h2 {
 }
 
 .property-heading-row .media-arrow {
-  background: rgba(255, 255, 255, 0.95);
+  background: #fff;
 }
 
 .property-cards-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0.65rem;
 }
 
 .listing-card {
-  background: #f3f4f6;
-  border: none;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
   padding: 0;
   overflow: hidden;
 }
@@ -1346,7 +1341,7 @@ section[aria-labelledby="sold-properties"] h2 {
 
 .property-image {
   width: 100%;
-  height: 240px;
+  height: 220px;
   border: 0;
   object-fit: cover;
   display: block;
@@ -1356,7 +1351,7 @@ section[aria-labelledby="sold-properties"] h2 {
   position: absolute;
   top: 0.9rem;
   left: 0.9rem;
-  background: #032a59;
+  background: #1f2937;
   color: #fff;
   text-transform: uppercase;
   font-size: 0.86rem;
@@ -1368,8 +1363,8 @@ section[aria-labelledby="sold-properties"] h2 {
 .property-image-fallback {
   display: grid;
   place-items: center;
-  background: linear-gradient(145deg, #d9e4f8, #b7c9ec);
-  color: #11396d;
+  background: linear-gradient(145deg, #eceff3, #d8dde5);
+  color: #374151;
   font-weight: 700;
 }
 
@@ -1379,7 +1374,7 @@ section[aria-labelledby="sold-properties"] h2 {
 
 .property-details h3 {
   margin: 0;
-  color: #0b2f5f;
+  color: var(--text);
   font-size: clamp(1.1rem, 1.8vw, 1.55rem);
   line-height: 1.3;
 }
@@ -1401,7 +1396,7 @@ section[aria-labelledby="sold-properties"] h2 {
 }
 
 .property-spec-grid strong {
-  color: #0b2f5f;
+  color: var(--text);
   font-size: 1.1rem;
   line-height: 1.2;
 }
