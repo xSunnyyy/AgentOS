@@ -158,6 +158,14 @@ body { line-height: 1.55; }
   color: var(--text);
 }
 
+
+.site-header .nav-actions .btn {
+  padding: 0.58rem 0.92rem;
+  font-size: 0.98rem;
+  line-height: 1.2;
+  min-width: auto;
+}
+
 .hero { padding: 64px 0 56px; }
 
 .hero-grid {
@@ -472,6 +480,12 @@ textarea {
     width: 100%;
     display: flex;
     justify-content: center;
+  }
+
+  .site-header .nav-actions .btn {
+    padding: 0.5rem 0.82rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
   }
 
   .theme-toggle-footer {
