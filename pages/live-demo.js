@@ -3,41 +3,85 @@ import { useState } from 'react';
 
 const galleryImages = [
   {
-    src: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=80',
+    src: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80',
     alt: 'Modern luxury home exterior at sunset',
   },
   {
-    src: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=80',
+    src: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80',
     alt: 'Bright open concept living room with large windows',
   },
   {
-    src: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=900&q=80',
+    src: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1200&q=80',
     alt: 'Contemporary kitchen with island and pendant lighting',
   },
   {
-    src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80',
+    src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
     alt: 'Backyard pool and patio staging for a listed property',
   },
   {
-    src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80',
+    src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
     alt: 'Elegant primary bedroom with neutral decor',
   },
 ];
 
 const saleProperties = [
-  { address: '742 Glenview Lane, Austin, TX', price: '$1,150,000', beds: '4 Bed', baths: '3 Bath' },
-  { address: '88 Ocean Crest Blvd, San Diego, CA', price: '$2,080,000', beds: '5 Bed', baths: '4 Bath' },
-  { address: '619 Maple Grove Dr, Nashville, TN', price: '$815,000', beds: '3 Bed', baths: '2 Bath' },
-  { address: '37 Cedar Ridge Way, Charlotte, NC', price: '$699,000', beds: '4 Bed', baths: '2.5 Bath' },
-  { address: '415 Summit View Rd, Denver, CO', price: '$1,320,000', beds: '4 Bed', baths: '3.5 Bath' },
+  {
+    address: '742 Glenview Lane, Austin, TX',
+    price: '$1,150,000',
+    beds: '4 Bed',
+    baths: '3 Bath',
+    image: 'https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?auto=format&fit=crop&w=1000&q=80',
+  },
+  {
+    address: '88 Ocean Crest Blvd, San Diego, CA',
+    price: '$2,080,000',
+    beds: '5 Bed',
+    baths: '4 Bath',
+    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1000&q=80',
+  },
+  { address: '619 Maple Grove Dr, Nashville, TN', price: '$815,000', beds: '3 Bed', baths: '2 Bath', image: null },
+  {
+    address: '37 Cedar Ridge Way, Charlotte, NC',
+    price: '$699,000',
+    beds: '4 Bed',
+    baths: '2.5 Bath',
+    image: 'https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?auto=format&fit=crop&w=1000&q=80',
+  },
+  {
+    address: '415 Summit View Rd, Denver, CO',
+    price: '$1,320,000',
+    beds: '4 Bed',
+    baths: '3.5 Bath',
+    image: 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1000&q=80',
+  },
 ];
 
 const soldProperties = [
-  { address: '101 Harbor Point, Seattle, WA', price: '$1,440,000', closed: 'Closed in 14 days' },
-  { address: '34 Canyon Oak Ct, Phoenix, AZ', price: '$972,000', closed: 'Closed over asking' },
-  { address: '502 Magnolia Ave, Atlanta, GA', price: '$764,000', closed: 'Closed in 9 days' },
-  { address: '209 Lakefront Dr, Orlando, FL', price: '$1,025,000', closed: 'Closed cash offer' },
-  { address: '66 Pine Terrace, Portland, OR', price: '$689,000', closed: 'Closed in 12 days' },
+  {
+    address: '101 Harbor Point, Seattle, WA',
+    price: '$1,440,000',
+    closed: 'Closed in 14 days',
+    image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=80',
+  },
+  { address: '34 Canyon Oak Ct, Phoenix, AZ', price: '$972,000', closed: 'Closed over asking', image: null },
+  {
+    address: '502 Magnolia Ave, Atlanta, GA',
+    price: '$764,000',
+    closed: 'Closed in 9 days',
+    image: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1000&q=80',
+  },
+  {
+    address: '209 Lakefront Dr, Orlando, FL',
+    price: '$1,025,000',
+    closed: 'Closed cash offer',
+    image: 'https://images.unsplash.com/photo-1600607687641-62f0f36d9f0f?auto=format&fit=crop&w=1000&q=80',
+  },
+  {
+    address: '66 Pine Terrace, Portland, OR',
+    price: '$689,000',
+    closed: 'Closed in 12 days',
+    image: 'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=1000&q=80',
+  },
 ];
 
 const testimonials = [
@@ -59,31 +103,23 @@ const testimonials = [
 ];
 
 const profileSections = [
-  {
-    heading: 'Languages',
-    content: 'English, Spanish, Mandarin',
-  },
-  {
-    heading: 'Awards',
-    content: 'Top Producer 2023, Client Choice Excellence Award',
-  },
-  {
-    heading: 'Designations',
-    content: 'CRS, ABR, SRES',
-  },
-  {
-    heading: 'Specializations',
-    content: 'Luxury Homes, Relocation, First-Time Buyers',
-  },
-  {
-    heading: 'Associated Company',
-    content: 'Northshore Premier Realty Group',
-  },
+  { heading: 'Languages', content: 'English, Spanish, Mandarin' },
+  { heading: 'Awards', content: 'Top Producer 2023, Client Choice Excellence Award' },
+  { heading: 'Designations', content: 'CRS, ABR, SRES' },
+  { heading: 'Specializations', content: 'Luxury Homes, Relocation, First-Time Buyers' },
+  { heading: 'Associated Company', content: 'Northshore Premier Realty Group' },
 ];
+
+const VISIBLE_PROPERTY_COUNT = 3;
+
+const getVisibleProperties = (items, startIndex) =>
+  Array.from({ length: Math.min(VISIBLE_PROPERTY_COUNT, items.length) }, (_, offset) => items[(startIndex + offset) % items.length]);
 
 export default function LiveDemoPage() {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
+  const [saleStartIndex, setSaleStartIndex] = useState(0);
+  const [soldStartIndex, setSoldStartIndex] = useState(0);
   const activeMediaItem = galleryImages[activeMediaIndex];
 
   const showPreviousMedia = () => {
@@ -92,6 +128,18 @@ export default function LiveDemoPage() {
 
   const showNextMedia = () => {
     setActiveMediaIndex((current) => (current === galleryImages.length - 1 ? 0 : current + 1));
+  };
+
+  const cycleProperties = (type, direction) => {
+    const items = type === 'sale' ? saleProperties : soldProperties;
+    const setter = type === 'sale' ? setSaleStartIndex : setSoldStartIndex;
+
+    setter((current) => {
+      if (direction === 'next') {
+        return (current + 1) % items.length;
+      }
+      return current === 0 ? items.length - 1 : current - 1;
+    });
   };
 
   return (
@@ -146,8 +194,7 @@ export default function LiveDemoPage() {
                 <h1 id="live-demo-title">Alex Morgan</h1>
                 <p className="agent-subtitle"><strong>Luxury Residential Specialist</strong></p>
 
-                <label className="agent-message-label" htmlFor="send-message">Send message</label>
-                <textarea id="send-message" className="agent-message-box" rows={4} placeholder="Hi Alex, I'm interested in scheduling a private tour this week." />
+                <a className="btn btn-primary message-cta" href="#contact-me-title">Send Message</a>
 
                 <div className="agent-socials" aria-label="Agent social links">
                   {['YouTube', 'Instagram', 'Facebook', 'TikTok', 'X', 'LinkedIn', 'Pinterest'].map((network) => (
@@ -161,7 +208,7 @@ export default function LiveDemoPage() {
               <div className="agent-headshot-wrap">
                 <img
                   className="agent-headshot"
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=700&q=80"
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=80"
                   alt="Agent headshot"
                 />
               </div>
@@ -169,19 +216,19 @@ export default function LiveDemoPage() {
 
             <div className="featured-showcase">
               <div className="featured-media-card">
-                <h2>Featured Media</h2>
                 <div className="featured-media-view" role="region" aria-label="Featured property images">
-                  <button type="button" className="media-arrow" onClick={showPreviousMedia} aria-label="View previous featured image">←</button>
                   <img src={activeMediaItem.src} alt={activeMediaItem.alt} />
-                  <button type="button" className="media-arrow" onClick={showNextMedia} aria-label="View next featured image">→</button>
+                  <div className="media-overlay-controls">
+                    <button type="button" className="media-arrow" onClick={showPreviousMedia} aria-label="View previous featured image">←</button>
+                    <button type="button" className="media-arrow" onClick={showNextMedia} aria-label="View next featured image">→</button>
+                  </div>
                 </div>
                 <p className="media-position">Image {activeMediaIndex + 1} of {galleryImages.length}</p>
               </div>
 
               <aside className="headline-card">
-                <h3>Tagline / Headline / Catch Phrase</h3>
                 <p>
-                  "Helping clients move with confidence through strategic pricing, premium marketing, and white-glove support from first showing to final signature."
+                  Helping clients move with confidence through strategic pricing, premium marketing, and white-glove support from first showing to final signature.
                 </p>
               </aside>
             </div>
@@ -220,12 +267,21 @@ export default function LiveDemoPage() {
             </section>
 
             <section aria-labelledby="properties-for-sale">
-              <div className="section-heading-row">
+              <div className="section-heading-row property-heading-row">
                 <h2 id="properties-for-sale">Properties for Sale</h2>
+                <div className="inline-arrows" aria-label="Properties for sale navigation">
+                  <button type="button" className="media-arrow" onClick={() => cycleProperties('sale', 'previous')} aria-label="Show previous properties for sale">←</button>
+                  <button type="button" className="media-arrow" onClick={() => cycleProperties('sale', 'next')} aria-label="Show next properties for sale">→</button>
+                </div>
               </div>
-              <div className="property-row-scroll" role="region" aria-label="Properties currently for sale">
-                {saleProperties.map((property) => (
-                  <article key={property.address} className="property-card">
+              <div className="property-cards-grid" role="region" aria-label="Properties currently for sale">
+                {getVisibleProperties(saleProperties, saleStartIndex).map((property) => (
+                  <article key={`${property.address}-sale`} className="property-card">
+                    {property.image ? (
+                      <img className="property-image" src={property.image} alt={`Property at ${property.address}`} />
+                    ) : (
+                      <div className="property-image property-image-fallback">No Images Avaliable</div>
+                    )}
                     <h3>{property.address}</h3>
                     <p className="property-price">{property.price}</p>
                     <p className="property-meta">{property.beds} • {property.baths}</p>
@@ -235,12 +291,21 @@ export default function LiveDemoPage() {
             </section>
 
             <section aria-labelledby="sold-properties">
-              <div className="section-heading-row">
+              <div className="section-heading-row property-heading-row">
                 <h2 id="sold-properties">Sold Properties</h2>
+                <div className="inline-arrows" aria-label="Sold properties navigation">
+                  <button type="button" className="media-arrow" onClick={() => cycleProperties('sold', 'previous')} aria-label="Show previous sold properties">←</button>
+                  <button type="button" className="media-arrow" onClick={() => cycleProperties('sold', 'next')} aria-label="Show next sold properties">→</button>
+                </div>
               </div>
-              <div className="property-row-scroll" role="region" aria-label="Recently sold properties">
-                {soldProperties.map((property) => (
-                  <article key={property.address} className="property-card sold">
+              <div className="property-cards-grid" role="region" aria-label="Recently sold properties">
+                {getVisibleProperties(soldProperties, soldStartIndex).map((property) => (
+                  <article key={`${property.address}-sold`} className="property-card sold">
+                    {property.image ? (
+                      <img className="property-image" src={property.image} alt={`Sold property at ${property.address}`} />
+                    ) : (
+                      <div className="property-image property-image-fallback">No Images Avaliable</div>
+                    )}
                     <h3>{property.address}</h3>
                     <p className="property-price">{property.price}</p>
                     <p className="property-meta">{property.closed}</p>
