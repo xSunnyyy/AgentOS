@@ -923,10 +923,8 @@ textarea {
   display: grid;
   border: 1px solid color-mix(in oklab, var(--primary) 22%, var(--border));
   border-radius: 18px;
-  background:
-    radial-gradient(620px 240px at 15% 0%, color-mix(in oklab, var(--primary) 12%, transparent), transparent 68%),
-    color-mix(in oklab, var(--surface) 88%, transparent);
-  box-shadow: 0 16px 32px color-mix(in oklab, var(--primary) 12%, transparent);
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
   padding: 1.15rem;
 }
 
@@ -996,5 +994,95 @@ textarea {
     position: static;
     margin-top: 0.4rem;
     min-width: 0;
+  }
+}
+
+.contact-page {
+  padding: 48px 0;
+}
+
+.contact-page-layer {
+  background:
+    radial-gradient(840px 420px at 8% 8%, color-mix(in oklab, var(--primary) 16%, transparent), transparent 64%),
+    radial-gradient(820px 420px at 92% 6%, rgba(16, 185, 129, 0.12), transparent 62%),
+    linear-gradient(145deg, #f5f8ff 0%, #eef4ff 100%);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: clamp(1.6rem, 4vw, 3.1rem) 0;
+}
+
+.contact-page-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 2vw, 1.4rem);
+  align-items: start;
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-page-copy h1 {
+  margin: 0.2rem 0 0.7rem;
+  max-width: 18ch;
+  margin-inline: auto;
+}
+
+.contact-page-copy p {
+  color: var(--muted);
+  margin: 0;
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+.contact-page-form {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.1);
+  padding: clamp(1rem, 2.2vw, 1.5rem);
+  display: grid;
+  gap: 0.65rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: min(620px, 100%);
+  margin: 0 auto;
+  text-align: left;
+}
+
+.contact-page-form:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 44px rgba(15, 23, 42, 0.12);
+}
+
+.contact-page-form input,
+.contact-page-form select {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.72rem 0.8rem;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+}
+
+.contact-page-form label {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.contact-microcopy {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.contact-page-form .btn {
+  margin-top: 0.35rem;
+  justify-self: center;
+}
+
+@media (max-width: 900px) {
+  .contact-page-copy h1,
+  .contact-page-copy p {
+    max-width: none;
   }
 }
