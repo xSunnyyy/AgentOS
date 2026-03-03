@@ -626,7 +626,6 @@ textarea {
     radial-gradient(760px 480px at 50% 98%, color-mix(in oklab, var(--primary) 10%, transparent), transparent 70%),
     color-mix(in oklab, var(--surface) 82%, transparent);
   box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(12px);
   overflow: hidden;
   padding: clamp(1.1rem, 3.2vw, 2.4rem);
 }
@@ -690,18 +689,9 @@ textarea {
   position: relative;
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 0.75rem 0.85rem 0.8rem 0.9rem;
+  padding: 0.9rem 1rem 0.95rem;
   background: linear-gradient(145deg, color-mix(in oklab, var(--surface) 86%, transparent), color-mix(in oklab, var(--surface) 62%, transparent));
   box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(12px);
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.timeline-card.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .card-left {
@@ -756,6 +746,36 @@ textarea {
 .timeline-card p {
   margin: 0.42rem 0 0;
   color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.timeline-highlights {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.timeline-highlights li {
+  color: var(--text);
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.timeline-highlights li::before {
+  content: '✓';
+  display: inline-grid;
+  place-items: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 16%, #fff);
 }
 
 .faq-placeholder {
@@ -787,5 +807,194 @@ textarea {
   .card-right .timeline-dot {
     left: -1px;
     right: auto;
+  }
+}
+
+
+.faq-list {
+  display: grid;
+  gap: 0.75rem;
+  text-align: left;
+  margin-top: 1.2rem;
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--surface) 82%, transparent);
+  overflow: hidden;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.95rem 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 1rem 1rem;
+  color: var(--muted);
+}
+
+.faq-view-all {
+  margin-top: 1.1rem;
+}
+
+.all-faq-page {
+  padding: 48px 0;
+}
+
+.all-faq-shell {
+  max-width: 880px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: color-mix(in oklab, var(--surface) 84%, transparent);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.all-faq-shell h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.article-page {
+  padding: 46px 0;
+}
+
+.article-shell {
+  max-width: 900px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: color-mix(in oklab, var(--surface) 86%, transparent);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1.1rem, 2.8vw, 2.2rem);
+}
+
+.article-shell h1 {
+  margin: 0.2rem 0 0.75rem;
+  font-size: clamp(1.95rem, 4vw, 3rem);
+}
+
+.article-shell h2 {
+  margin: 1.65rem 0 0.65rem;
+  font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+}
+
+.article-shell h3 {
+  margin: 1.15rem 0 0.45rem;
+  font-size: 1.05rem;
+}
+
+.article-shell p {
+  margin: 0.65rem 0;
+  color: var(--muted);
+}
+
+.article-shell ul {
+  margin: 0.4rem 0 0.8rem;
+  padding-left: 1.2rem;
+}
+
+.article-shell li {
+  margin: 0.28rem 0;
+}
+
+.article-lead {
+  margin: 0;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.article-link {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.article-cta {
+  margin-top: 1.75rem;
+  display: grid;
+  border: 1px solid color-mix(in oklab, var(--primary) 22%, var(--border));
+  border-radius: 18px;
+  background:
+    radial-gradient(620px 240px at 15% 0%, color-mix(in oklab, var(--primary) 12%, transparent), transparent 68%),
+    color-mix(in oklab, var(--surface) 88%, transparent);
+  box-shadow: 0 16px 32px color-mix(in oklab, var(--primary) 12%, transparent);
+  padding: 1.15rem;
+}
+
+.article-cta h2 {
+  margin-top: 0;
+}
+
+.article-cta .btn {
+  margin-top: 0.9rem;
+  justify-self: center;
+}
+
+
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown summary {
+  list-style: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.nav-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.nav-dropdown[open] summary,
+.nav-dropdown summary:hover,
+.nav-dropdown summary:focus-visible {
+  color: var(--text);
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 260px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: color-mix(in oklab, var(--surface) 94%, white);
+  box-shadow: var(--shadow-soft);
+  padding: 0.35rem;
+  display: grid;
+  gap: 0.15rem;
+  z-index: 20;
+}
+
+.nav-dropdown-menu a {
+  padding: 0.58rem 0.62rem;
+  border-radius: 8px;
+  color: var(--text);
+}
+
+.nav-dropdown-menu a:hover,
+.nav-dropdown-menu a:focus-visible {
+  background: color-mix(in oklab, var(--primary) 14%, transparent);
+}
+
+@media (max-width: 700px) {
+  .nav-dropdown {
+    width: 100%;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    margin-top: 0.4rem;
+    min-width: 0;
   }
 }
