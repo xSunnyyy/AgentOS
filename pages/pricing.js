@@ -48,12 +48,18 @@ export default function PricingPage() {
             </a>
 
             <nav className="main-nav" aria-label="Primary">
-              <a href="/how-it-works">How It Works</a>
-              <a href="/pricing" aria-current="page">
-                Pricing
-              </a>
-              <a href="/#contact">Contact</a>
-            </nav>
+            <details className="nav-dropdown">
+              <summary>How It Works</summary>
+              <div className="nav-dropdown-menu" role="menu" aria-label="How It Works links">
+                <a href="/how-it-works#how-title" role="menuitem">The Works & FAQs</a>
+                <a href="/rank-real-estate-website-on-google" role="menuitem">Website Ranking Rules</a>
+                <a href="/seo-for-realtors" role="menuitem">SEO For Realtors</a>
+                <a href="/best-real-estate-website-platform" role="menuitem">Real Estate Website Platform</a>
+              </div>
+            </details>
+            <a href="/pricing">Pricing</a>
+            <a href="/#contact">Contact</a>
+          </nav>
 
             <div className="nav-actions">
               <a className="btn btn-primary" href="/#contact">
