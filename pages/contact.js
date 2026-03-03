@@ -55,9 +55,13 @@ export default function ContactPage() {
                 </div>
               </details>
               <a href="/pricing">Pricing</a>
-              <a href="/contact" aria-current="page">
-                Contact
-              </a>
+              <details className="nav-dropdown" open>
+              <summary>Contact</summary>
+              <div className="nav-dropdown-menu" role="menu" aria-label="Contact links">
+                <a href="/contact" role="menuitem" aria-current="page">Contact</a>
+                <a href="/live-demo" role="menuitem">Live Demo</a>
+              </div>
+            </details>
             </nav>
 
             <div className="nav-actions">
