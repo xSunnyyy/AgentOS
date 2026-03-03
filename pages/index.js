@@ -133,7 +133,7 @@ export default function HomePage() {
           <div className="container hero-grid">
             <div className="hero-copy">
               <p className="hero-chip">SEO-First Real Estate Agent Website Builder</p>
-              <h1 id="hero-title">Real Estate Agent Websites Built for Local SEO, your Listings & Lead Generation</h1>
+              <h1 id="hero-title">Real Estate Agent Websites Built for Local SEO, Your Listings & Lead Generation</h1>
               <p className="hero-subcopy">
                 Launch a fully branded, MLS-ready real estate website designed to rank on Google and convert local
                 buyers and sellers into qualified leads. Publish in minutes, edit anytime, and grow your real estate
