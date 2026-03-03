@@ -98,7 +98,7 @@ export default function HomePage() {
         <title>Real Estate Agent Website Builder | SEO & IDX</title>
         <meta
           name="description"
-          content="Launch a fully branded MLS-ready real estate agent website builder designed for local SEO, your listings, and lead generation."
+          content="Launch a fully branded MLS-ready real estate agent website builder designed for local SEO, IDX listings, and lead generation."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
@@ -110,18 +110,18 @@ export default function HomePage() {
 
       <header className="site-header">
         <div className="container nav-wrap">
-          <a className="brand" href="#" aria-label="Homepage">
+          <a className="brand" href="/" aria-label="Homepage">
             AgentOS
           </a>
 
           <nav className="main-nav" aria-label="Primary">
-            <a href="#how-it-works">How It Works</a>
-            <a href="#pricing">Pricing</a>
+            <a href="/how-it-works">How It Works</a>
+            <a href="/pricing">Pricing</a>
             <a href="#contact">Contact</a>
           </nav>
 
           <div className="nav-actions">
-            <a className="btn btn-primary" href="#pricing">
+            <a className="btn btn-primary" href="/pricing">
               Start Building Free
             </a>
           </div>
@@ -129,11 +129,11 @@ export default function HomePage() {
       </header>
 
       <main id="main-content">
-        <section className="hero" id="pricing" aria-labelledby="hero-title">
+        <section className="hero" id="hero" aria-labelledby="hero-title">
           <div className="container hero-grid">
             <div className="hero-copy">
               <p className="hero-chip">SEO-First Real Estate Agent Website Builder</p>
-              <h1 id="hero-title">Real Estate Agent Websites Built for Local SEO, Your Listings & Lead Generation</h1>
+              <h1 id="hero-title">Real Estate Agent Websites Built for Local SEO, IDX Listings & Lead Generation</h1>
               <p className="hero-subcopy">
                 Launch a fully branded, MLS-ready real estate website designed to rank on Google and convert local
                 buyers and sellers into qualified leads. Publish in minutes, edit anytime, and grow your real estate
@@ -143,7 +143,7 @@ export default function HomePage() {
                 <a className="btn btn-primary btn-lg" href="#contact">
                   Start Building Free
                 </a>
-                <a className="btn btn-secondary btn-lg" href="#how-it-works">
+                <a className="btn btn-secondary btn-lg" href="/how-it-works">
                   View Live Demo
                 </a>
               </div>
@@ -151,7 +151,7 @@ export default function HomePage() {
 
             <div className="hero-image-wrap">
               <img
-                src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?auto=format&fit=crop&w=1400&q=80"
+                src="https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&w=1400&q=80"
                 alt="Real estate website dashboard preview showing listings and lead capture widgets"
                 className="hero-image"
               />
