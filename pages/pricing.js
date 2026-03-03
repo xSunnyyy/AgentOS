@@ -92,9 +92,6 @@ export default function PricingPage() {
                   websites, capture leads, and scale their business with confidence.
                 </p>
 
-                <div className="billing-toggle" aria-label="Subscription type">
-                  <span className="billing-btn is-active">Monthly</span>
-                </div>
               </div>
 
               <div className="pricing-grid">

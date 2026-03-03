@@ -568,34 +568,6 @@ html[data-theme='dark'] .hero-image-wrap {
   color: var(--muted);
 }
 
-.billing-toggle {
-  margin: 1.4rem auto 0;
-  padding: 0.28rem;
-  border-radius: 999px;
-  border: 1px solid var(--stroke);
-  display: inline-flex;
-  gap: 0.4rem;
-  background: color-mix(in oklab, var(--surface) 82%, transparent);
-}
-
-.billing-btn {
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: 0.78rem;
-  padding: 0.55rem 1.2rem;
-  border-radius: 999px;
-  cursor: pointer;
-}
-
-.billing-btn.is-active {
-  color: #fff;
-  background: linear-gradient(135deg, #8c54ff, #c86bff);
-}
-
 .pricing-grid {
   margin-top: 1.6rem;
   display: grid;
