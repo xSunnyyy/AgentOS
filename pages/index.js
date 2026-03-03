@@ -61,7 +61,7 @@ const steps = [
 const softwareSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'AgentLaunch',
+  name: 'AgentOS',
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
   description:
@@ -111,7 +111,7 @@ export default function HomePage() {
       <header className="site-header">
         <div className="container nav-wrap">
           <a className="brand" href="#" aria-label="Homepage">
-            AgentLaunch
+            AgentOS
           </a>
 
           <nav className="main-nav" aria-label="Primary">
@@ -122,7 +122,7 @@ export default function HomePage() {
 
           <div className="nav-actions">
             <a className="btn btn-primary" href="#pricing">
-              Start for ${PRICE}
+              Start Building Free
             </a>
           </div>
         </div>
@@ -209,7 +209,7 @@ export default function HomePage() {
 
       <footer className="site-footer">
         <div className="container footer-wrap">
-          <small>© {new Date().getFullYear()} AgentLaunch. All rights reserved.</small>
+          <small>© {new Date().getFullYear()} AgentOS. All rights reserved.</small>
           <button
             id="theme-toggle"
             className="theme-toggle theme-toggle-footer"
