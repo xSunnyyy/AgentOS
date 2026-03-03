@@ -30,7 +30,7 @@ const saleProperties = [
     price: '$1,150,000',
     beds: '4',
     baths: '3 Full',
-    image: 'https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?auto=format&fit=crop&w=1000&q=80',
+    image: '/listings/listing-01.svg',
     description: 'Modern hillside residence with oversized windows, smart-home integration, and curated designer finishes across an open-concept interior tailored for entertaining.',
   },
   {
@@ -38,7 +38,7 @@ const saleProperties = [
     price: '$2,080,000',
     beds: '5',
     baths: '4 Full',
-    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1000&q=80',
+    image: '/listings/listing-02.svg',
     description: "Coastal-inspired home featuring panoramic sunset views, a chef's kitchen, and seamless indoor-outdoor living with a private terrace and lounge deck.",
   },
   {
@@ -46,7 +46,7 @@ const saleProperties = [
     price: '$815,000',
     beds: '3',
     baths: '2 Full',
-    image: 'https://images.unsplash.com/photo-1600607688066-890987f18a86?auto=format&fit=crop&w=1000&q=80',
+    image: '/listings/listing-03.svg',
     description: 'Renovated urban bungalow with hardwood floors, bright natural light, and a landscaped backyard retreat minutes from dining, music venues, and downtown access.',
   },
   {
@@ -54,7 +54,7 @@ const saleProperties = [
     price: '$699,000',
     beds: '4',
     baths: '2 Full 1 Partial',
-    image: 'https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?auto=format&fit=crop&w=1000&q=80',
+    image: '/listings/listing-04.svg',
     description: 'Spacious family layout with a flexible bonus room, energy-efficient upgrades, and a covered patio designed for year-round gatherings and weekend hosting.',
   },
   {
@@ -62,7 +62,7 @@ const saleProperties = [
     price: '$1,320,000',
     beds: '4',
     baths: '3 Full 1 Partial',
-    image: 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1000&q=80',
+    image: '/listings/listing-05.svg',
     description: 'Elevated mountain-view property offering custom millwork, spa-style primary suite, and premium indoor comfort with access to trails, schools, and city amenities.',
   },
 ];
@@ -74,7 +74,7 @@ const soldProperties = [
     beds: '4',
     baths: '3 Full',
     closed: 'Closed in 14 days',
-    image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=80',
+    image: '/listings/listing-06.svg',
   },
   {
     address: '34 Canyon Oak Ct, Phoenix, AZ',
@@ -82,7 +82,7 @@ const soldProperties = [
     beds: '3',
     baths: '2 Full 1 Partial',
     closed: 'Closed over asking',
-    image: 'https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1000&q=80',
+    image: '/listings/listing-07.svg',
   },
   {
     address: '502 Magnolia Ave, Atlanta, GA',
@@ -90,7 +90,7 @@ const soldProperties = [
     beds: '3',
     baths: '2 Full',
     closed: 'Closed in 9 days',
-    image: 'https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1000&q=80',
+    image: '/listings/listing-08.svg',
   },
   {
     address: '209 Lakefront Dr, Orlando, FL',
@@ -98,7 +98,7 @@ const soldProperties = [
     beds: '5',
     baths: '4 Full 1 Partial',
     closed: 'Closed cash offer',
-    image: 'https://images.unsplash.com/photo-1600607687641-62f0f36d9f0f?auto=format&fit=crop&w=1000&q=80',
+    image: '/listings/listing-09.svg',
   },
   {
     address: '66 Pine Terrace, Portland, OR',
@@ -106,7 +106,7 @@ const soldProperties = [
     beds: '4',
     baths: '3 Full',
     closed: 'Closed in 12 days',
-    image: 'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=1000&q=80',
+    image: '/listings/listing-10.svg',
   },
 ];
 
@@ -201,7 +201,13 @@ export default function LiveDemoPage() {
                 </div>
               </details>
               <a href="/pricing">Pricing</a>
-              <a href="/contact">Contact</a>
+              <details className="nav-dropdown">
+                <summary>Contact</summary>
+                <div className="nav-dropdown-menu" role="menu" aria-label="Contact links">
+                  <a href="/contact" role="menuitem">Contact</a>
+                  <a href="/live-demo" role="menuitem">Live Demo</a>
+                </div>
+              </details>
             </nav>
 
             <div className="nav-actions">
