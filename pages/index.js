@@ -110,11 +110,11 @@ export default function HomePage() {
         <section className="hero" id="pricing" aria-labelledby="hero-title">
           <div className="container hero-grid">
             <div className="hero-copy">
-              <p className="hero-chip">SEO-First Real Estate Websites</p>
-              <h1 id="hero-title">Best Real Estate Agent Websites Built to Rank and Convert.</h1>
+              <p className="hero-chip">SEO-First Real Estate Agent Website Builder</p>
+              <h1 id="hero-title">Real Estate Agent Websites Built for Local SEO, IDX Listings & Lead Generation</h1>
               <p className="hero-subcopy">
-                Launch a search-optimized website that helps local buyers and sellers find you first. Publish quickly,
-                edit anytime, and grow your pipeline without hiring a developer.
+                Launch a fully branded, MLS-ready real estate website designed to rank on Google and convert local buyers and sellers into qualified leads. 
+                Publish in minutes, edit anytime, and grow your real estate business — no developer required.
               </p>
               <div className="hero-actions">
                 <a className="btn btn-primary btn-lg" href="#pricing">
