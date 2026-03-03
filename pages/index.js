@@ -59,16 +59,16 @@ const steps = [
 ];
 
 export default function HomePage() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState('light');
 
-  // ✅ New: used to gate pricing/payment CTAs until after Step 4 is viewed
+  // Gate pricing/payment CTAs until after Step 4 is viewed
   const [hasSeenPreviewStep, setHasSeenPreviewStep] = useState(false);
-  const previewStepRef = useRef<HTMLLIElement | null>(null);
+  const previewStepRef = useRef(null);
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem('theme');
     const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = (storedTheme as 'light' | 'dark') || (systemDark ? 'dark' : 'light');
+    const initialTheme = storedTheme || (systemDark ? 'dark' : 'light');
     setTheme(initialTheme);
     document.documentElement.dataset.theme = initialTheme;
   }, []);
@@ -78,14 +78,15 @@ export default function HomePage() {
     window.localStorage.setItem('theme', theme);
   }, [theme]);
 
-  // ✅ New: observe Step 4 (Preview) entering viewport → unlock pricing CTA
+  // Observe Step 4 entering viewport -> unlock pricing CTA
   useEffect(() => {
     const el = previewStepRef.current;
     if (!el) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setHasSeenPreviewStep(true);
+      (entries) => {
+        const entry = entries && entries[0];
+        if (entry && entry.isIntersecting) setHasSeenPreviewStep(true);
       },
       { threshold: 0.35 }
     );
@@ -97,7 +98,6 @@ export default function HomePage() {
   const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
 
   const primaryCta = useMemo(() => {
-    // Before preview: encourage building (no payment)
     if (!hasSeenPreviewStep) {
       return {
         href: '#how-it-works',
@@ -105,7 +105,6 @@ export default function HomePage() {
         helper: 'No credit card required',
       };
     }
-    // After preview: allow go-live pricing
     return {
       href: '#pricing',
       label: `Go Live for $${PRICE}`,
@@ -161,7 +160,6 @@ export default function HomePage() {
           </nav>
 
           <div className="nav-actions">
-            {/* ✅ Payment CTA gated until after Step 4 is viewed */}
             <a className="btn btn-primary" href={primaryCta.href}>
               {primaryCta.label}
             </a>
@@ -170,14 +168,13 @@ export default function HomePage() {
       </header>
 
       <main id="main-content">
-        {/* ✅ Keep hero as hero (not pricing) to avoid "pay before preview" */}
+        {/* Hero */}
         <section className="hero" id="top" aria-labelledby="hero-title">
           <div className="container hero-grid">
             <div className="hero-copy">
-              {/* ✅ Small copy fix: remove spaced hyphen + tighten wording */}
               <p className="hero-chip">SEO-First Real Estate Agent Website Builder</p>
 
-              {/* ✅ Fix “weird” headline by controlling line breaks (3-line rhythm) */}
+              {/* Controlled 3-line headline to avoid weird wrapping */}
               <h1 id="hero-title" className="hero-title">
                 <span className="hero-title-line">Real Estate Agent Websites</span>
                 <span className="hero-title-line">Built for Local SEO, IDX Listings</span>
@@ -191,7 +188,6 @@ export default function HomePage() {
               </p>
 
               <div className="hero-actions">
-                {/* ✅ Primary CTA now respects the “preview before pay” rule */}
                 <div className="hero-cta-stack">
                   <a className="btn btn-primary btn-lg" href={primaryCta.href}>
                     {primaryCta.label}
@@ -201,13 +197,11 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                {/* ✅ Keep your “Get in Contact” feature */}
                 <a className="btn btn-secondary btn-lg" href="#contact">
                   Get in Contact
                 </a>
               </div>
 
-              {/* ✅ Trust row (helps conversion + matches SaaS pattern) */}
               <ul className="hero-trust" aria-label="Key benefits">
                 <li>✔ Preview before you pay</li>
                 <li>✔ Built for agents &amp; brokers</li>
@@ -227,6 +221,7 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* How it works */}
         <section className="wizard" id="how-it-works" aria-labelledby="wizard-title">
           <div className="container wizard-shell">
             <h2 id="wizard-title">How It Works</h2>
@@ -237,19 +232,18 @@ export default function HomePage() {
 
             <ol className="wizard-flow" aria-label="Five-step onboarding flow">
               {steps.map((step, index) => {
-                const isPreviewStep = index === 3; // Step 4 (0-based index)
+                const isPreviewStep = index === 3; // Step 4
                 return (
                   <li
                     key={step.title}
                     className="wizard-step-card"
-                    ref={isPreviewStep ? previewStepRef : undefined}
+                    ref={isPreviewStep ? previewStepRef : null}
                   >
                     <div className="icon-badge">{step.icon}</div>
                     <span className="step-pill">Step {index + 1}</span>
                     <h3>{step.title}</h3>
                     <p>{step.description}</p>
 
-                    {/* ✅ Add the explicit trust line under Step 4 (no feature removed) */}
                     {isPreviewStep && (
                       <p className="step-trustline">
                         <strong>No payment required</strong> until you’re ready to go live.
@@ -262,13 +256,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ✅ New: Dedicated Pricing section so you’re not “selling” in the hero before preview */}
+        {/* Pricing */}
         <section className="pricing" id="pricing" aria-labelledby="pricing-title">
           <div className="container pricing-shell">
             <h2 id="pricing-title">Pricing</h2>
-            <p className="section-intro">
-              Start building for free. When you’re ready to publish, activate your site and go live.
-            </p>
+            <p className="section-intro">Start building for free. When you’re ready to publish, activate your site.</p>
 
             <div className="pricing-card" role="region" aria-label="Launch plan">
               <div className="pricing-card-header">
@@ -286,7 +278,6 @@ export default function HomePage() {
                 <li>Edit anytime</li>
               </ul>
 
-              {/* ✅ Gated messaging without breaking anchors/features */}
               {!hasSeenPreviewStep ? (
                 <div className="pricing-locked" aria-live="polite">
                   <p>
@@ -307,6 +298,7 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Contact */}
         <section className="contact" id="contact" aria-labelledby="contact-title">
           <div className="container contact-shell">
             <h2 id="contact-title">Contact Us</h2>
@@ -323,7 +315,7 @@ export default function HomePage() {
               <input id="email" name="email" type="email" autoComplete="email" required />
 
               <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" rows={5} required />
+              <textarea id="message" name="message" rows="5" required />
 
               <button className="btn btn-primary" type="submit">
                 Send Message
