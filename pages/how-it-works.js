@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const timelineSteps = [
   {
@@ -30,35 +30,7 @@ const timelineSteps = [
 ];
 
 export default function HowItWorksPage() {
-  const [theme, setTheme] = useState('light');
-  const [scrollProgress, setScrollProgress] = useState(0);
-
   useEffect(() => {
-    const storedTheme = window.localStorage.getItem('theme');
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = storedTheme || (systemDark ? 'dark' : 'light');
-    setTheme(initialTheme);
-    document.documentElement.dataset.theme = initialTheme;
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const timeline = document.getElementById('timeline');
-      if (!timeline) return;
-
-      const rect = timeline.getBoundingClientRect();
-      const viewportHeight = window.innerHeight || 1;
-      const total = rect.height + viewportHeight;
-      const seen = viewportHeight - rect.top;
-      const progress = Math.min(100, Math.max(0, (seen / total) * 100));
-      setScrollProgress(progress);
-    };
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -73,16 +45,10 @@ export default function HowItWorksPage() {
     const cards = document.querySelectorAll('.timeline-card');
     cards.forEach((card) => observer.observe(card));
 
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
     return () => {
       observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
 
   return (
     <>
@@ -129,10 +95,6 @@ export default function HowItWorksPage() {
                 <p>
                   A step-by-step guide to launching a fully optimized real estate website in days — no coding required.
                 </p>
-                <p className="timeline-kicker">From Signup to Live Website in 48–72 Hours</p>
-                <div className="timeline-progress" role="presentation" aria-hidden="true">
-                  <span style={{ width: `${scrollProgress}%` }} />
-                </div>
               </div>
 
               <div className="timeline" id="timeline">
@@ -165,15 +127,6 @@ export default function HowItWorksPage() {
         <footer className="site-footer">
           <div className="container footer-wrap">
             <small>© {new Date().getFullYear()} AgentOS. All rights reserved.</small>
-            <button
-              id="theme-toggle"
-              className="theme-toggle theme-toggle-footer"
-              type="button"
-              aria-label="Toggle light and dark mode"
-              onClick={toggleTheme}
-            >
-              {theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}
-            </button>
           </div>
         </footer>
       </div>
