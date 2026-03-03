@@ -23,6 +23,7 @@ export default function SeoForRealtorsPage() {
             </a>
 
             <nav className="main-nav" aria-label="Primary">
+              <a href="/">Home</a>
               <details className="nav-dropdown">
                 <summary>How It Works</summary>
                 <div className="nav-dropdown-menu" role="menu" aria-label="How It Works links">

@@ -36,6 +36,7 @@ export default function ContactPage() {
             </a>
 
             <nav className="main-nav" aria-label="Primary">
+              <a href="/">Home</a>
               <details className="nav-dropdown">
                 <summary>How It Works</summary>
                 <div className="nav-dropdown-menu" role="menu" aria-label="How It Works links">
@@ -98,9 +99,6 @@ export default function ContactPage() {
 
                 <label htmlFor="email">Email</label>
                 <input id="email" name="email" type="email" autoComplete="email" required />
-
-                <label htmlFor="brokerage-name">Brokerage Name</label>
-                <input id="brokerage-name" name="brokerage-name" type="text" autoComplete="organization" />
 
                 <label htmlFor="website">Website (if existing)</label>
                 <input id="website" name="website" type="url" placeholder="https://" />

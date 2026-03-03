@@ -330,13 +330,24 @@ h2 {
 
 .contact-shell {
   text-align: center;
-  max-width: 740px;
+  max-width: 1200px;
 }
 
 .contact-subtitle {
   margin: 0.9rem auto 1.6rem;
   color: var(--muted);
   max-width: 64ch;
+}
+
+.home-contact-form {
+  width: 100%;
+  max-width: 100%;
+  gap: 0.45rem;
+  padding: 1rem;
+}
+
+.home-contact-form .btn {
+  justify-self: center;
 }
 
 .contact-form {
@@ -1093,9 +1104,86 @@ textarea {
   justify-self: center;
 }
 
+/* Homepage uses contact-page-form styles but should span full section width. */
+.contact-page-form.home-contact-form {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
 @media (max-width: 900px) {
   .contact-page-copy h1,
   .contact-page-copy p {
     max-width: none;
+  }
+}
+
+.live-demo-page {
+  padding: clamp(42px, 6vw, 76px) 0;
+}
+
+.live-demo-shell {
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: color-mix(in oklab, var(--surface) 86%, transparent);
+  box-shadow: var(--shadow-soft);
+  padding: clamp(1rem, 2.5vw, 2rem);
+}
+
+.live-demo-shell h1 {
+  margin: 0.25rem 0 0.65rem;
+}
+
+.demo-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.demo-stat-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  padding: 0.95rem;
+}
+
+.demo-stat-card h2 {
+  margin: 0;
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+}
+
+.demo-stat-card p {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+}
+
+.demo-table-wrap {
+  margin-top: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: auto;
+  background: #fff;
+}
+
+.demo-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.demo-table th,
+.demo-table td {
+  text-align: left;
+  padding: 0.72rem 0.8rem;
+  border-bottom: 1px solid #e5ebf7;
+}
+
+.demo-table th {
+  background: #f7f9ff;
+}
+
+@media (max-width: 900px) {
+  .demo-stats {
+    grid-template-columns: 1fr;
   }
 }
