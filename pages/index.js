@@ -6,46 +6,48 @@ const PRICE = 50;
 const steps = [
   {
     title: 'Sign Up',
-    description: 'Create your account and choose the package that fits your real estate business goals.',
+    description: 'Create your free account to begin building your custom real estate website. No payment required to start — explore the platform risk-free while setting up your online presence.',
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm-7 8a7 7 0 0 1 14 0" />
+        <circle cx="12" cy="8" r="3.5" />
+        <path d="M5 19a7 7 0 0 1 14 0" />
       </svg>
     ),
   },
   {
     title: 'Provide Information',
-    description: 'Enter your brokerage details, market focus, and brand voice so your content is tailored.',
+    description: 'Enter your brokerage details, service areas, specialties, and brand preferences so your website is tailored to your real estate business and local market.',
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 5h16M4 12h16M4 19h10" />
+        <path d="M6 5h12M6 10h12M6 15h8M4 5h.01M4 10h.01M4 15h.01" />
       </svg>
     ),
   },
   {
     title: 'Submit Listing Data',
-    description: 'Upload property photos, descriptions, and listing specifics in one guided flow.',
+    description: 'Upload property listings, photos, and descriptions through a simple guided workflow. We automatically structure your content for optimized property pages and search visibility.',
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 16V4m0 0 4 4m-4-4-4 4M5 15v4h14v-4" />
+        <path d="M12 15V5m0 0 4 4m-4-4-4 4M5 16v3h14v-3" />
       </svg>
     ),
   },
   {
     title: 'Preview',
-    description: 'Review your generated site and listing pages before publishing to ensure everything looks right.',
+    description: 'Review your fully generated real estate website before publishing. Explore your pages, test your listings, and make sure everything looks exactly how you want.',
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12Zm10 3a3 3 0 1 0-3-3 3 3 0 0 0 3 3Z" />
+        <path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12Z" />
+        <circle cx="12" cy="12" r="2.5" />
       </svg>
     ),
   },
   {
-    title: 'Publish',
-    description: 'Go live and start capturing qualified buyer and seller leads from a polished online presence.',
+    title: 'Publish & Activate',
+    description: "When you're ready to launch, choose your plan and publish your site instantly. Start capturing buyer and seller leads with a polished, SEO-optimized real estate website.",
     icon: (
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M5 12h14M13 6l6 6-6 6" />
+        <path d="M4 12h16M13 6l7 6-7 6" />
       </svg>
     ),
   },
@@ -136,9 +138,9 @@ export default function HomePage() {
 
         <section className="wizard" id="how-it-works" aria-labelledby="wizard-title">
           <div className="container wizard-shell">
-            <h2 id="wizard-title">How it works</h2>
+            <h2 id="wizard-title">How It Works</h2>
             <p className="section-intro wizard-intro">
-              A clean, step-by-step launch process designed to make setup feel easy from signup to publish.
+              Launch your professional real estate website in minutes with a guided, done-for-you setup — from account creation to publishing your fully branded agent website.
             </p>
 
             <ol className="wizard-flow" aria-label="Five-step onboarding flow">
@@ -155,14 +157,13 @@ export default function HomePage() {
         </section>
 
         <section className="contact" id="contact" aria-labelledby="contact-title">
-          <div className="container contact-wrap">
-            <div className="contact-copy">
-              <h2 id="contact-title">Contact Us</h2>
-              <p>
-                Have questions before you start? We’re happy to help you choose the best option for your business.
-                Send a message and we’ll get back to you soon.
-              </p>
-            </div>
+          <div className="container contact-shell">
+            <h2 id="contact-title">Contact Us</h2>
+            <p className="contact-subtitle">
+              Have questions before you start? Send us a quick message and we’ll help you choose the best option for
+              your business.
+            </p>
+
             <form className="contact-form" action="#" method="post">
               <label htmlFor="name">Name</label>
               <input id="name" name="name" type="text" autoComplete="name" required />
