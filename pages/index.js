@@ -134,7 +134,7 @@ export default function HomePage() {
                 <a className="btn btn-primary btn-lg" href="/contact">
                   Start Building Free
                 </a>
-                <a className="btn btn-secondary btn-lg" href="/how-it-works">
+                <a className="btn btn-secondary btn-lg" href="/live-demo">
                   View Live Demo
                 </a>
               </div>
@@ -198,9 +198,6 @@ export default function HomePage() {
 
               <label htmlFor="home-email">Email</label>
               <input id="home-email" name="email" type="email" autoComplete="email" required />
-
-              <label htmlFor="home-brokerage-name">Brokerage Name</label>
-              <input id="home-brokerage-name" name="brokerage-name" type="text" autoComplete="organization" />
 
               <label htmlFor="home-website">Website (if existing)</label>
               <input id="home-website" name="website" type="url" placeholder="https://" />
