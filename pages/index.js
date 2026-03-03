@@ -151,7 +151,7 @@ export default function HomePage() {
 
             <div className="hero-image-wrap">
               <img
-                src="https://images.unsplash.com/photo-1708196889869-1405f43976ea?auto=format&fit=crop&w=1400&q=80"
+                src="https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&w=1400&q=80"
                 alt="Real estate website dashboard preview showing listings and lead capture widgets"
                 className="hero-image"
               />
