@@ -30,7 +30,7 @@ const saleProperties = [
     price: '$1,150,000',
     beds: '4',
     baths: '3 Full',
-    image: '/listings/listing-01.svg',
+    image: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80',
     description: 'Modern hillside residence with oversized windows, smart-home integration, and curated designer finishes across an open-concept interior tailored for entertaining.',
   },
   {
@@ -38,7 +38,7 @@ const saleProperties = [
     price: '$2,080,000',
     beds: '5',
     baths: '4 Full',
-    image: '/listings/listing-02.svg',
+    image: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80',
     description: "Coastal-inspired home featuring panoramic sunset views, a chef's kitchen, and seamless indoor-outdoor living with a private terrace and lounge deck.",
   },
   {
@@ -46,7 +46,7 @@ const saleProperties = [
     price: '$815,000',
     beds: '3',
     baths: '2 Full',
-    image: '/listings/listing-03.svg',
+    image: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80',
     description: 'Renovated urban bungalow with hardwood floors, bright natural light, and a landscaped backyard retreat minutes from dining, music venues, and downtown access.',
   },
   {
@@ -54,7 +54,7 @@ const saleProperties = [
     price: '$699,000',
     beds: '4',
     baths: '2 Full 1 Partial',
-    image: '/listings/listing-04.svg',
+    image: 'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?auto=format&fit=crop&w=1200&q=80',
     description: 'Spacious family layout with a flexible bonus room, energy-efficient upgrades, and a covered patio designed for year-round gatherings and weekend hosting.',
   },
   {
@@ -62,7 +62,7 @@ const saleProperties = [
     price: '$1,320,000',
     beds: '4',
     baths: '3 Full 1 Partial',
-    image: '/listings/listing-05.svg',
+    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
     description: 'Elevated mountain-view property offering custom millwork, spa-style primary suite, and premium indoor comfort with access to trails, schools, and city amenities.',
   },
 ];
@@ -74,7 +74,7 @@ const soldProperties = [
     beds: '4',
     baths: '3 Full',
     closed: 'Closed in 14 days',
-    image: '/listings/listing-06.svg',
+    image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80',
   },
   {
     address: '34 Canyon Oak Ct, Phoenix, AZ',
@@ -82,7 +82,7 @@ const soldProperties = [
     beds: '3',
     baths: '2 Full 1 Partial',
     closed: 'Closed over asking',
-    image: '/listings/listing-07.svg',
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
   },
   {
     address: '502 Magnolia Ave, Atlanta, GA',
@@ -90,7 +90,7 @@ const soldProperties = [
     beds: '3',
     baths: '2 Full',
     closed: 'Closed in 9 days',
-    image: '/listings/listing-08.svg',
+    image: 'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=1200&q=80',
   },
   {
     address: '209 Lakefront Dr, Orlando, FL',
@@ -98,7 +98,7 @@ const soldProperties = [
     beds: '5',
     baths: '4 Full 1 Partial',
     closed: 'Closed cash offer',
-    image: '/listings/listing-09.svg',
+    image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80',
   },
   {
     address: '66 Pine Terrace, Portland, OR',
@@ -106,7 +106,7 @@ const soldProperties = [
     beds: '4',
     baths: '3 Full',
     closed: 'Closed in 12 days',
-    image: '/listings/listing-10.svg',
+    image: 'https://images.unsplash.com/photo-1600607687641-62f0f36d9f0f?auto=format&fit=crop&w=1200&q=80',
   },
 ];
 
