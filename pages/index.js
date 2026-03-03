@@ -98,7 +98,7 @@ export default function HomePage() {
         <title>Real Estate Agent Website Builder | SEO & IDX</title>
         <meta
           name="description"
-          content="Launch a fully branded MLS-ready real estate agent website builder designed for local SEO, IDX listings, and lead generation."
+          content="Launch a fully branded MLS-ready real estate agent website builder designed for local SEO, your listings, and lead generation."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
@@ -133,7 +133,7 @@ export default function HomePage() {
           <div className="container hero-grid">
             <div className="hero-copy">
               <p className="hero-chip">SEO-First Real Estate Agent Website Builder</p>
-              <h1 id="hero-title">Real Estate Agent Websites Built for Local SEO, IDX Listings & Lead Generation</h1>
+              <h1 id="hero-title">Real Estate Agent Websites Built for Local SEO, your Listings & Lead Generation</h1>
               <p className="hero-subcopy">
                 Launch a fully branded, MLS-ready real estate website designed to rank on Google and convert local
                 buyers and sellers into qualified leads. Publish in minutes, edit anytime, and grow your real estate
