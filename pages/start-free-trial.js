@@ -19,6 +19,8 @@ const fileToDataUrl = (file) => new Promise((resolve, reject) => {
 export default function StartFreeTrialPage() {
   const formRef = useRef(null);
   const [step, setStep] = useState('form');
+  const [saleStartIndex, setSaleStartIndex] = useState(0);
+  const [soldStartIndex, setSoldStartIndex] = useState(0);
   const [form, setForm] = useState({
     location: '',
     agentName: '',
@@ -81,6 +83,25 @@ export default function StartFreeTrialPage() {
   ];
 
   const galleryImages = [...form.pictures.map((item) => item.image).filter(Boolean), ...defaultGallery].slice(0, 6);
+  const visiblePropertyCount = 3;
+  const getVisibleProperties = (items, startIndex) =>
+    Array.from({ length: Math.min(visiblePropertyCount, items.length) }, (_, offset) => items[(startIndex + offset) % items.length]);
+
+  const cycleProperties = (type, direction) => {
+    const items = type === 'sale' ? form.propertiesForSale : form.soldProperties;
+    const setter = type === 'sale' ? setSaleStartIndex : setSoldStartIndex;
+
+    if (!items.length) {
+      return;
+    }
+
+    setter((current) => {
+      if (direction === 'next') {
+        return (current + 1) % items.length;
+      }
+      return current === 0 ? items.length - 1 : current - 1;
+    });
+  };
 
   if (step === 'preview') {
     return (
@@ -145,19 +166,41 @@ export default function StartFreeTrialPage() {
               </section>
 
               <section aria-labelledby="for-sale-title">
-                <h2 id="for-sale-title">Properties For Sale</h2>
-                <div className="trial-scroll-row" role="region" aria-label="Properties for sale">
-                  {form.propertiesForSale.map((property, index) => (
-                    <article key={`sale-preview-${index}`} className="listing-card trial-mini-card">
-                      <img className="property-image" src={property.image || defaultGallery[index % defaultGallery.length]} alt={property.address || `For sale property ${index + 1}`} />
-                      <div className="listing-card-copy">
+                <div className="section-heading-row property-heading-row">
+                  <h2 id="for-sale-title">Properties for Sale</h2>
+                  <div className="inline-arrows" aria-label="Properties for sale navigation">
+                    <button type="button" className="media-arrow" onClick={() => cycleProperties('sale', 'previous')} aria-label="Show previous properties for sale">←</button>
+                    <button type="button" className="media-arrow" onClick={() => cycleProperties('sale', 'next')} aria-label="Show next properties for sale">→</button>
+                  </div>
+                </div>
+                <div className="property-cards-grid" role="region" aria-label="Properties currently for sale">
+                  {getVisibleProperties(form.propertiesForSale, saleStartIndex).map((property, index) => (
+                    <article key={`${property.address || 'sale'}-${index}`} className="property-card listing-card active-listing">
+                      <div className="property-image-wrap">
+                        {property.image ? (
+                          <img className="property-image" src={property.image} alt={`Property at ${property.address || 'Address'}`} />
+                        ) : (
+                          <div className="property-image property-image-fallback">No Images Avaliable</div>
+                        )}
+                        <span className="listing-status">For Sale</span>
+                      </div>
+                      <div className="property-details">
                         <h3>{property.address || 'Address'}</h3>
-                        <p className="listing-price">{property.price || 'Price'}</p>
                         <div className="property-spec-grid">
-                          <p><strong>{property.bedrooms || '-'}</strong> Beds</p>
-                          <p><strong>{property.bathrooms || '-'}</strong> Baths</p>
+                          <div>
+                            <span>Price</span>
+                            <strong>{property.price || 'Price'}</strong>
+                          </div>
+                          <div>
+                            <span>Bedrooms</span>
+                            <strong>{property.bedrooms || '-'}</strong>
+                          </div>
+                          <div>
+                            <span>Bathrooms</span>
+                            <strong>{property.bathrooms || '-'}</strong>
+                          </div>
                         </div>
-                        <p>{property.description || 'Property description.'}</p>
+                        <p className="property-description">{(property.description || 'Property description.').slice(0, 300)}</p>
                       </div>
                     </article>
                   ))}
@@ -165,19 +208,40 @@ export default function StartFreeTrialPage() {
               </section>
 
               <section aria-labelledby="sold-title">
-                <h2 id="sold-title">Sold Properties</h2>
-                <div className="trial-scroll-row" role="region" aria-label="Sold properties">
-                  {form.soldProperties.map((property, index) => (
-                    <article key={`sold-preview-${index}`} className="listing-card trial-mini-card">
-                      <img className="property-image" src={property.image || defaultGallery[index % defaultGallery.length]} alt={property.address || `Sold property ${index + 1}`} />
-                      <div className="listing-card-copy">
+                <div className="section-heading-row property-heading-row">
+                  <h2 id="sold-title">Sold Properties</h2>
+                  <div className="inline-arrows" aria-label="Sold properties navigation">
+                    <button type="button" className="media-arrow" onClick={() => cycleProperties('sold', 'previous')} aria-label="Show previous sold properties">←</button>
+                    <button type="button" className="media-arrow" onClick={() => cycleProperties('sold', 'next')} aria-label="Show next sold properties">→</button>
+                  </div>
+                </div>
+                <div className="property-cards-grid" role="region" aria-label="Recently sold properties">
+                  {getVisibleProperties(form.soldProperties, soldStartIndex).map((property, index) => (
+                    <article key={`${property.address || 'sold'}-${index}`} className="property-card listing-card sold-listing">
+                      <div className="property-image-wrap">
+                        {property.image ? (
+                          <img className="property-image" src={property.image} alt={`Sold property at ${property.address || 'Address'}`} />
+                        ) : (
+                          <div className="property-image property-image-fallback">No Images Avaliable</div>
+                        )}
+                        <span className="listing-status">Sold</span>
+                      </div>
+                      <div className="property-details">
                         <h3>{property.address || 'Address'}</h3>
-                        <p className="listing-price">{property.price || 'Price'}</p>
                         <div className="property-spec-grid">
-                          <p><strong>{property.bedrooms || '-'}</strong> Beds</p>
-                          <p><strong>{property.bathrooms || '-'}</strong> Baths</p>
+                          <div>
+                            <span>Price</span>
+                            <strong>{property.price || 'Price'}</strong>
+                          </div>
+                          <div>
+                            <span>Bedrooms</span>
+                            <strong>{property.bedrooms || '-'}</strong>
+                          </div>
+                          <div>
+                            <span>Bathrooms</span>
+                            <strong>{property.bathrooms || '-'}</strong>
+                          </div>
                         </div>
-                        <p>{property.closed || 'Sold details pending.'}</p>
                       </div>
                     </article>
                   ))}
