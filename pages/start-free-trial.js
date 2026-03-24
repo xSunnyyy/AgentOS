@@ -1,14 +1,24 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const createSocial = () => ({ platform: '', url: '' });
-const createPicture = () => ({ url: '' });
+const createPicture = () => ({ image: '', alt: '' });
 const createSaleProperty = () => ({ image: '', address: '', price: '', bedrooms: '', bathrooms: '', description: '', listingLink: '' });
-const createSoldProperty = () => ({ image: '', address: '', price: '', bedrooms: '', bathrooms: '' });
+const createSoldProperty = () => ({ image: '', address: '', price: '', bedrooms: '', bathrooms: '', closed: '' });
 const createTestimonial = () => ({ name: '', rating: '', review: '' });
 
+const defaultGallery = ['/listings/listing-01.svg', '/listings/listing-02.svg', '/listings/listing-03.svg'];
+
+const fileToDataUrl = (file) => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.onload = () => resolve(typeof reader.result === 'string' ? reader.result : '');
+  reader.onerror = () => reject(new Error('Unable to read uploaded file.'));
+  reader.readAsDataURL(file);
+});
+
 export default function StartFreeTrialPage() {
-  const [showPreview, setShowPreview] = useState(false);
+  const formRef = useRef(null);
+  const [step, setStep] = useState('form');
   const [status, setStatus] = useState({ loading: false, error: '', success: '' });
   const [billing, setBilling] = useState({ plan: 'free-trial', cardName: '', cardNumber: '', expiry: '', cvc: '' });
   const [form, setForm] = useState({
@@ -41,8 +51,31 @@ export default function StartFreeTrialPage() {
     });
   };
 
+  const updateArrayFile = async (arrayKey, index, field, file) => {
+    if (!file) {
+      updateArrayField(arrayKey, index, field, '');
+      return;
+    }
+
+    const image = await fileToDataUrl(file);
+    updateArrayField(arrayKey, index, field, image);
+  };
+
   const addArrayItem = (arrayKey, factory) => setForm((prev) => ({ ...prev, [arrayKey]: [...prev[arrayKey], factory()] }));
   const removeArrayItem = (arrayKey, index) => setForm((prev) => ({ ...prev, [arrayKey]: prev[arrayKey].filter((_, itemIndex) => itemIndex !== index) }));
+
+  const openPreview = () => {
+    if (!formRef.current?.reportValidity()) {
+      return;
+    }
+    setStatus({ loading: false, error: '', success: '' });
+    setStep('preview');
+  };
+
+  const openCheckout = () => {
+    setStatus({ loading: false, error: '', success: '' });
+    setStep('checkout');
+  };
 
   const submitTrial = async () => {
     if (!billing.cardName || !billing.cardNumber || !billing.expiry || !billing.cvc) {
@@ -66,6 +99,145 @@ export default function StartFreeTrialPage() {
 
     setStatus({ loading: false, error: '', success: `Saved! Submission ID: ${result.id}` });
   };
+
+  const profileSections = [
+    { heading: 'Languages', content: form.languages },
+    { heading: 'Awards', content: form.awards },
+    { heading: 'Designations', content: form.designations },
+    { heading: 'Specializations', content: form.specializations },
+    { heading: 'Associated Company', content: form.associatedCompany },
+  ];
+
+  const galleryImages = [...form.pictures.map((item) => item.image).filter(Boolean), ...defaultGallery].slice(0, 6);
+
+  if (step === 'preview') {
+    return (
+      <>
+        <Head>
+          <title>Preview Your Page | AgentOS</title>
+          <meta name="description" content="Full live preview of your personalized AgentOS page before selecting service and payment." />
+        </Head>
+
+        <a className="skip-link" href="#main-content">Skip to content</a>
+
+        <div className="pricing-layout">
+          <main id="main-content" className="live-demo-page trial-preview-page">
+            <section className="live-demo-shell container" aria-labelledby="live-demo-title">
+              <div className="agent-hero">
+                <div>
+                  <p className="hero-chip">{form.location || 'Your Market'}</p>
+                  <h1 id="live-demo-title">{form.agentName || 'Agent Name'}</h1>
+                  <p className="agent-subtitle"><strong>{form.agentTitle || 'Professional Title'}</strong></p>
+                  <a className="btn btn-primary message-cta" href="#contact-me-title">Send Message</a>
+
+                  <div className="agent-socials" aria-label="Agent social links">
+                    {form.socials.filter((item) => item.platform).map((social, index) => (
+                      <a key={`${social.platform}-${index}`} href={social.url || '#'} className="social-chip" aria-label={social.platform}>
+                        {social.platform}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="agent-headshot-wrap">
+                  <img
+                    className="agent-headshot"
+                    src={galleryImages[0] || defaultGallery[0]}
+                    alt={form.agentName ? `${form.agentName} headshot` : 'Agent headshot'}
+                  />
+                </div>
+              </div>
+
+              <div className="featured-showcase">
+                <div className="featured-media-card trial-preview-gallery">
+                  <div className="featured-media-view" role="region" aria-label="Featured property images">
+                    <img src={galleryImages[1] || galleryImages[0] || defaultGallery[1]} alt="Featured media" />
+                  </div>
+                </div>
+
+                <aside className="headline-card">
+                  <p>{form.headline || 'Your headline will appear here in the final page.'}</p>
+                </aside>
+              </div>
+
+              <section className="profile-resume" aria-label="Agent profile details">
+                <div className="profile-left-column">
+                  {profileSections.map((section) => (
+                    <article key={section.heading} className="profile-item">
+                      <h3>{section.heading}</h3>
+                      <p>{section.content || 'To be added'}</p>
+                    </article>
+                  ))}
+                </div>
+
+                <article className="profile-item description-item">
+                  <h3>Description</h3>
+                  <p>{form.description || 'Add your description in the previous step and click Preview again.'}</p>
+                </article>
+              </section>
+
+              <section aria-labelledby="for-sale-title">
+                <h2 id="for-sale-title">Properties For Sale</h2>
+                <div className="property-card-grid">
+                  {form.propertiesForSale.map((property, index) => (
+                    <article key={`sale-preview-${index}`} className="listing-card">
+                      <img className="property-image" src={property.image || defaultGallery[index % defaultGallery.length]} alt={property.address || `For sale property ${index + 1}`} />
+                      <div className="listing-card-copy">
+                        <h3>{property.address || 'Address'}</h3>
+                        <p className="listing-price">{property.price || 'Price'}</p>
+                        <div className="property-spec-grid">
+                          <p><strong>{property.bedrooms || '-'}</strong> Beds</p>
+                          <p><strong>{property.bathrooms || '-'}</strong> Baths</p>
+                        </div>
+                        <p>{property.description || 'Property description.'}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              <section aria-labelledby="sold-title">
+                <h2 id="sold-title">Sold Properties</h2>
+                <div className="property-card-grid">
+                  {form.soldProperties.map((property, index) => (
+                    <article key={`sold-preview-${index}`} className="listing-card">
+                      <img className="property-image" src={property.image || defaultGallery[index % defaultGallery.length]} alt={property.address || `Sold property ${index + 1}`} />
+                      <div className="listing-card-copy">
+                        <h3>{property.address || 'Address'}</h3>
+                        <p className="listing-price">{property.price || 'Price'}</p>
+                        <div className="property-spec-grid">
+                          <p><strong>{property.bedrooms || '-'}</strong> Beds</p>
+                          <p><strong>{property.bathrooms || '-'}</strong> Baths</p>
+                        </div>
+                        <p>{property.closed || 'Sold details pending.'}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              <section aria-labelledby="testimonial-title">
+                <h2 id="testimonial-title">Testimonials</h2>
+                <div className="testimonial-grid">
+                  {form.testimonials.map((testimonial, index) => (
+                    <article key={`testimonial-preview-${index}`} className="testimonial-card">
+                      <p>{testimonial.review || 'Client review appears here.'}</p>
+                      <p><strong>{testimonial.name || 'Client Name'}</strong> {testimonial.rating ? `• ${testimonial.rating}/5` : ''}</p>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            </section>
+
+            <div className="container trial-preview-cta">
+              <button type="button" className="btn btn-secondary" onClick={() => setStep('form')}>Back to Edit</button>
+              <button type="button" className="btn btn-primary" onClick={openCheckout}>Next: Choose Service & Payment</button>
+            </div>
+          </main>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -112,10 +284,13 @@ export default function StartFreeTrialPage() {
               <div className="contact-page-copy">
                 <p className="hero-chip">Start Free Trial</p>
                 <h1 id="trial-title">Build Your Agent Page</h1>
-                <p>Complete setup, preview exactly what your page will look like, then start your trial.</p>
+                <p>
+                  Upload your media, fill in property details under each image, preview the full page,
+                  then choose your service plan and payment.
+                </p>
               </div>
 
-              <form className="contact-page-form trial-form" onSubmit={(event) => event.preventDefault()}>
+              <form ref={formRef} className="contact-page-form trial-form" onSubmit={(event) => event.preventDefault()}>
                 <h2>Account Setup</h2>
                 <div className="trial-grid two-col">
                   <div>
@@ -130,31 +305,31 @@ export default function StartFreeTrialPage() {
 
                 <h2>Agent Profile</h2>
                 <div className="trial-grid two-col">
-                  <div><label htmlFor="location">Location</label><input id="location" type="text" value={form.location} onChange={(event) => updateField('location', event.target.value)} /></div>
-                  <div><label htmlFor="agent-name">Name</label><input id="agent-name" type="text" value={form.agentName} onChange={(event) => updateField('agentName', event.target.value)} /></div>
-                  <div><label htmlFor="agent-title">Title</label><input id="agent-title" type="text" value={form.agentTitle} onChange={(event) => updateField('agentTitle', event.target.value)} /></div>
-                  <div><label htmlFor="headline">Headline</label><input id="headline" type="text" value={form.headline} onChange={(event) => updateField('headline', event.target.value)} /></div>
+                  <div><label htmlFor="location">Location</label><input id="location" type="text" required value={form.location} onChange={(event) => updateField('location', event.target.value)} /></div>
+                  <div><label htmlFor="agent-name">Name</label><input id="agent-name" type="text" required value={form.agentName} onChange={(event) => updateField('agentName', event.target.value)} /></div>
+                  <div><label htmlFor="agent-title">Title</label><input id="agent-title" type="text" required value={form.agentTitle} onChange={(event) => updateField('agentTitle', event.target.value)} /></div>
+                  <div><label htmlFor="headline">Headline</label><input id="headline" type="text" required value={form.headline} onChange={(event) => updateField('headline', event.target.value)} /></div>
                 </div>
 
                 <label htmlFor="description">Description</label>
-                <textarea id="description" rows={5} value={form.description} onChange={(event) => updateField('description', event.target.value)} />
+                <textarea id="description" rows={5} required value={form.description} onChange={(event) => updateField('description', event.target.value)} />
 
                 <div className="trial-grid two-col">
-                  <div><label htmlFor="languages">Languages</label><input id="languages" type="text" value={form.languages} onChange={(event) => updateField('languages', event.target.value)} /></div>
-                  <div><label htmlFor="awards">Awards</label><input id="awards" type="text" value={form.awards} onChange={(event) => updateField('awards', event.target.value)} /></div>
-                  <div><label htmlFor="designations">Designations</label><input id="designations" type="text" value={form.designations} onChange={(event) => updateField('designations', event.target.value)} /></div>
-                  <div><label htmlFor="specializations">Specializations</label><input id="specializations" type="text" value={form.specializations} onChange={(event) => updateField('specializations', event.target.value)} /></div>
+                  <div><label htmlFor="languages">Languages</label><input id="languages" type="text" required value={form.languages} onChange={(event) => updateField('languages', event.target.value)} /></div>
+                  <div><label htmlFor="awards">Awards</label><input id="awards" type="text" required value={form.awards} onChange={(event) => updateField('awards', event.target.value)} /></div>
+                  <div><label htmlFor="designations">Designations</label><input id="designations" type="text" required value={form.designations} onChange={(event) => updateField('designations', event.target.value)} /></div>
+                  <div><label htmlFor="specializations">Specializations</label><input id="specializations" type="text" required value={form.specializations} onChange={(event) => updateField('specializations', event.target.value)} /></div>
                 </div>
 
                 <label htmlFor="associated-company">Associated Company</label>
-                <input id="associated-company" type="text" value={form.associatedCompany} onChange={(event) => updateField('associatedCompany', event.target.value)} />
+                <input id="associated-company" type="text" required value={form.associatedCompany} onChange={(event) => updateField('associatedCompany', event.target.value)} />
 
                 <div className="trial-group">
                   <h2>Socials</h2>
                   {form.socials.map((social, index) => (
                     <div key={`social-${index}`} className="trial-row">
-                      <input type="text" placeholder="Platform" value={social.platform} onChange={(event) => updateArrayField('socials', index, 'platform', event.target.value)} />
-                      <input type="url" placeholder="Profile URL" value={social.url} onChange={(event) => updateArrayField('socials', index, 'url', event.target.value)} />
+                      <input type="text" placeholder="Platform" required value={social.platform} onChange={(event) => updateArrayField('socials', index, 'platform', event.target.value)} />
+                      <input type="url" placeholder="Profile URL" required value={social.url} onChange={(event) => updateArrayField('socials', index, 'url', event.target.value)} />
                       {form.socials.length > 1 && <button type="button" className="btn btn-secondary" onClick={() => removeArrayItem('socials', index)}>Remove</button>}
                     </div>
                   ))}
@@ -162,10 +337,24 @@ export default function StartFreeTrialPage() {
                 </div>
 
                 <div className="trial-group">
-                  <h2>Pictures</h2>
+                  <h2>Gallery Pictures</h2>
                   {form.pictures.map((picture, index) => (
-                    <div key={`picture-${index}`} className="trial-row">
-                      <input type="url" placeholder="Image URL" value={picture.url} onChange={(event) => updateArrayField('pictures', index, 'url', event.target.value)} />
+                    <div key={`picture-${index}`} className="trial-card">
+                      <label>Upload Image {index + 1}</label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        required
+                        onChange={async (event) => updateArrayFile('pictures', index, 'image', event.target.files?.[0])}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Image alt text"
+                        required
+                        value={picture.alt}
+                        onChange={(event) => updateArrayField('pictures', index, 'alt', event.target.value)}
+                      />
+                      {picture.image && <img className="trial-upload-preview" src={picture.image} alt={picture.alt || `Upload ${index + 1}`} />}
                       {form.pictures.length > 1 && <button type="button" className="btn btn-secondary" onClick={() => removeArrayItem('pictures', index)}>Remove</button>}
                     </div>
                   ))}
@@ -175,14 +364,25 @@ export default function StartFreeTrialPage() {
                 <div className="trial-group">
                   <h2>Properties for Sale</h2>
                   {form.propertiesForSale.map((property, index) => (
-                    <div key={`sale-${index}`} className="trial-card trial-grid three-col">
-                      <input type="url" placeholder="Image URL" value={property.image} onChange={(event) => updateArrayField('propertiesForSale', index, 'image', event.target.value)} />
-                      <input type="text" placeholder="Address" value={property.address} onChange={(event) => updateArrayField('propertiesForSale', index, 'address', event.target.value)} />
-                      <input type="text" placeholder="Price" value={property.price} onChange={(event) => updateArrayField('propertiesForSale', index, 'price', event.target.value)} />
-                      <input type="text" placeholder="Bedrooms" value={property.bedrooms} onChange={(event) => updateArrayField('propertiesForSale', index, 'bedrooms', event.target.value)} />
-                      <input type="text" placeholder="Bathrooms" value={property.bathrooms} onChange={(event) => updateArrayField('propertiesForSale', index, 'bathrooms', event.target.value)} />
-                      <input type="url" placeholder="Listing link" value={property.listingLink} onChange={(event) => updateArrayField('propertiesForSale', index, 'listingLink', event.target.value)} />
-                      <textarea className="trial-full" rows={3} placeholder="Short description" value={property.description} onChange={(event) => updateArrayField('propertiesForSale', index, 'description', event.target.value)} />
+                    <div key={`sale-${index}`} className="trial-card">
+                      <label>Property Image {index + 1}</label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        required
+                        onChange={async (event) => updateArrayFile('propertiesForSale', index, 'image', event.target.files?.[0])}
+                      />
+                      {property.image && <img className="trial-upload-preview" src={property.image} alt={property.address || `Property ${index + 1}`} />}
+
+                      <div className="trial-grid two-col">
+                        <input type="text" placeholder="Address" required value={property.address} onChange={(event) => updateArrayField('propertiesForSale', index, 'address', event.target.value)} />
+                        <input type="text" placeholder="Price" required value={property.price} onChange={(event) => updateArrayField('propertiesForSale', index, 'price', event.target.value)} />
+                        <input type="text" placeholder="Bedrooms" required value={property.bedrooms} onChange={(event) => updateArrayField('propertiesForSale', index, 'bedrooms', event.target.value)} />
+                        <input type="text" placeholder="Bathrooms" required value={property.bathrooms} onChange={(event) => updateArrayField('propertiesForSale', index, 'bathrooms', event.target.value)} />
+                        <input className="trial-full" type="url" placeholder="Listing link" value={property.listingLink} onChange={(event) => updateArrayField('propertiesForSale', index, 'listingLink', event.target.value)} />
+                        <textarea className="trial-full" rows={3} placeholder="Short description" required value={property.description} onChange={(event) => updateArrayField('propertiesForSale', index, 'description', event.target.value)} />
+                      </div>
+
                       {form.propertiesForSale.length > 1 && <button type="button" className="btn btn-secondary" onClick={() => removeArrayItem('propertiesForSale', index)}>Remove</button>}
                     </div>
                   ))}
@@ -192,12 +392,24 @@ export default function StartFreeTrialPage() {
                 <div className="trial-group">
                   <h2>Sold Properties</h2>
                   {form.soldProperties.map((property, index) => (
-                    <div key={`sold-${index}`} className="trial-card trial-grid three-col">
-                      <input type="url" placeholder="Image URL" value={property.image} onChange={(event) => updateArrayField('soldProperties', index, 'image', event.target.value)} />
-                      <input type="text" placeholder="Address" value={property.address} onChange={(event) => updateArrayField('soldProperties', index, 'address', event.target.value)} />
-                      <input type="text" placeholder="Price" value={property.price} onChange={(event) => updateArrayField('soldProperties', index, 'price', event.target.value)} />
-                      <input type="text" placeholder="Bedrooms" value={property.bedrooms} onChange={(event) => updateArrayField('soldProperties', index, 'bedrooms', event.target.value)} />
-                      <input type="text" placeholder="Bathrooms" value={property.bathrooms} onChange={(event) => updateArrayField('soldProperties', index, 'bathrooms', event.target.value)} />
+                    <div key={`sold-${index}`} className="trial-card">
+                      <label>Sold Property Image {index + 1}</label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        required
+                        onChange={async (event) => updateArrayFile('soldProperties', index, 'image', event.target.files?.[0])}
+                      />
+                      {property.image && <img className="trial-upload-preview" src={property.image} alt={property.address || `Sold property ${index + 1}`} />}
+
+                      <div className="trial-grid two-col">
+                        <input type="text" placeholder="Address" required value={property.address} onChange={(event) => updateArrayField('soldProperties', index, 'address', event.target.value)} />
+                        <input type="text" placeholder="Price" required value={property.price} onChange={(event) => updateArrayField('soldProperties', index, 'price', event.target.value)} />
+                        <input type="text" placeholder="Bedrooms" required value={property.bedrooms} onChange={(event) => updateArrayField('soldProperties', index, 'bedrooms', event.target.value)} />
+                        <input type="text" placeholder="Bathrooms" required value={property.bathrooms} onChange={(event) => updateArrayField('soldProperties', index, 'bathrooms', event.target.value)} />
+                        <input className="trial-full" type="text" placeholder="Closed note (e.g. Closed in 12 days)" required value={property.closed} onChange={(event) => updateArrayField('soldProperties', index, 'closed', event.target.value)} />
+                      </div>
+
                       {form.soldProperties.length > 1 && <button type="button" className="btn btn-secondary" onClick={() => removeArrayItem('soldProperties', index)}>Remove</button>}
                     </div>
                   ))}
@@ -208,9 +420,9 @@ export default function StartFreeTrialPage() {
                   <h2>Testimonials / Reviews</h2>
                   {form.testimonials.map((testimonial, index) => (
                     <div key={`testimonial-${index}`} className="trial-card trial-grid two-col">
-                      <input type="text" placeholder="Client name" value={testimonial.name} onChange={(event) => updateArrayField('testimonials', index, 'name', event.target.value)} />
-                      <input type="number" min={1} max={5} placeholder="Rating (1-5)" value={testimonial.rating} onChange={(event) => updateArrayField('testimonials', index, 'rating', event.target.value)} />
-                      <textarea className="trial-full" rows={3} placeholder="Review" value={testimonial.review} onChange={(event) => updateArrayField('testimonials', index, 'review', event.target.value)} />
+                      <input type="text" placeholder="Client name" required value={testimonial.name} onChange={(event) => updateArrayField('testimonials', index, 'name', event.target.value)} />
+                      <input type="number" min={1} max={5} placeholder="Rating (1-5)" required value={testimonial.rating} onChange={(event) => updateArrayField('testimonials', index, 'rating', event.target.value)} />
+                      <textarea className="trial-full" rows={3} placeholder="Review" required value={testimonial.review} onChange={(event) => updateArrayField('testimonials', index, 'review', event.target.value)} />
                       {form.testimonials.length > 1 && <button type="button" className="btn btn-secondary" onClick={() => removeArrayItem('testimonials', index)}>Remove</button>}
                     </div>
                   ))}
@@ -218,17 +430,12 @@ export default function StartFreeTrialPage() {
                 </div>
 
                 <div className="trial-actions">
-                  <button type="button" className="btn btn-secondary" onClick={() => setShowPreview(true)}>Preview My Page</button>
+                  <button type="button" className="btn btn-primary" onClick={openPreview}>Preview Full Page</button>
                 </div>
 
-                {showPreview && (
+                {step === 'checkout' && (
                   <div className="trial-preview">
-                    <h2>Preview</h2>
-                    <p><strong>{form.agentName || 'Agent Name'}</strong> — {form.agentTitle || 'Agent Title'}</p>
-                    <p>{form.headline || 'Headline preview will appear here.'}</p>
-                    <p>{form.description || 'Description preview will appear here.'}</p>
-
-                    <h3>Billing & Plan</h3>
+                    <h2>Choose Service & Payment</h2>
                     <div className="trial-grid three-col">
                       <label><input type="radio" name="plan" value="free-trial" checked={billing.plan === 'free-trial'} onChange={(event) => setBilling((prev) => ({ ...prev, plan: event.target.value }))} /> Free Trial</label>
                       <label><input type="radio" name="plan" value="monthly" checked={billing.plan === 'monthly'} onChange={(event) => setBilling((prev) => ({ ...prev, plan: event.target.value }))} /> Monthly</label>
@@ -252,8 +459,8 @@ export default function StartFreeTrialPage() {
                     {status.success && <p className="form-success">{status.success}</p>}
 
                     <div className="trial-actions">
-                      <button type="button" className="btn btn-secondary" onClick={() => setShowPreview(false)}>Back to Edit</button>
-                      <button type="button" className="btn btn-primary" disabled={status.loading} onClick={submitTrial}>{status.loading ? 'Starting...' : 'Next: Start Trial'}</button>
+                      <button type="button" className="btn btn-secondary" onClick={() => setStep('preview')}>Back to Full Preview</button>
+                      <button type="button" className="btn btn-primary" disabled={status.loading} onClick={submitTrial}>{status.loading ? 'Starting...' : 'Start Trial'}</button>
                     </div>
                   </div>
                 )}

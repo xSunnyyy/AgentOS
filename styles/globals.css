@@ -1645,6 +1645,28 @@ section[aria-labelledby="sold-properties"] {
   background: color-mix(in oklab, var(--surface) 90%, transparent);
 }
 
+
+.trial-upload-preview {
+  width: min(360px, 100%);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.trial-preview-page {
+  padding-bottom: 2rem;
+}
+
+.trial-preview-gallery img {
+  min-height: 340px;
+  object-fit: cover;
+}
+
+.trial-preview-cta {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.7rem;
+  margin: 1rem auto 2rem;
+}
 .billing-note {
   margin: 0.45rem 0 0.7rem;
   font-weight: 600;
@@ -1656,5 +1678,10 @@ section[aria-labelledby="sold-properties"] {
   .trial-grid.two-col,
   .trial-grid.three-col {
     grid-template-columns: 1fr;
+  }
+
+  .trial-preview-cta {
+    justify-content: stretch;
+    flex-direction: column;
   }
 }
