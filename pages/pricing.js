@@ -104,7 +104,7 @@ export default function PricingPage() {
                       ))}
                     </ul>
 
-                    <a className={`btn ${plan.featured ? 'btn-primary' : 'btn-secondary'}`} href="/contact">
+                    <a className={`btn ${plan.featured ? 'btn-primary' : 'btn-secondary'}`} href="/start-free-trial">
                       {plan.cta}
                     </a>
                   </article>
