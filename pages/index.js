@@ -108,11 +108,17 @@ export default function HomePage() {
               </div>
             </details>
             <a href="/pricing">Pricing</a>
-            <a href="/contact">Contact</a>
+            <details className="nav-dropdown">
+              <summary>Contact</summary>
+              <div className="nav-dropdown-menu" role="menu" aria-label="Contact links">
+                <a href="/contact" role="menuitem">Contact</a>
+                <a href="/live-demo" role="menuitem">Live Demo</a>
+              </div>
+            </details>
           </nav>
 
           <div className="nav-actions">
-            <a className="btn btn-primary" href="/pricing">
+            <a className="btn btn-primary" href="/start-free-trial">
               Start Building Free
             </a>
           </div>
@@ -131,7 +137,7 @@ export default function HomePage() {
                 business — no developer required.
               </p>
               <div className="hero-actions">
-                <a className="btn btn-primary btn-lg" href="/contact">
+                <a className="btn btn-primary btn-lg" href="/start-free-trial">
                   Start Building Free
                 </a>
                 <a className="btn btn-secondary btn-lg" href="/live-demo">
