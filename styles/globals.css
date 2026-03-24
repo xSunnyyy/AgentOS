@@ -1133,7 +1133,7 @@ textarea {
 }
 
 .live-demo-page .container {
-  max-width: min(1480px, 97vw);
+  max-width: min(1720px, 99.2vw);
 }
 
 .live-demo-shell h1 {
@@ -1182,25 +1182,28 @@ textarea {
 }
 
 .social-chip {
-  border: 1px solid rgba(190, 210, 240, 0.34);
-  background: linear-gradient(135deg, rgba(8, 18, 36, 0.48), rgba(18, 30, 52, 0.38));
+  border: 1px solid rgba(222, 236, 255, 0.52);
+  background:
+    radial-gradient(120% 140% at 16% 10%, rgba(192, 226, 255, 0.42), transparent 46%),
+    linear-gradient(135deg, rgba(64, 92, 160, 0.34), rgba(44, 66, 132, 0.26));
   border-radius: 12px;
   padding: 0.42rem 0.55rem;
   font-size: 0.82rem;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
-  color: #f1f6ff;
-  backdrop-filter: blur(14px) saturate(145%);
-  -webkit-backdrop-filter: blur(14px) saturate(145%);
+  color: #f8fbff;
+  backdrop-filter: blur(20px) saturate(165%);
+  -webkit-backdrop-filter: blur(20px) saturate(165%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    0 10px 24px rgba(8, 18, 36, 0.18);
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    inset 0 -10px 24px rgba(36, 58, 117, 0.24),
+    0 14px 28px rgba(32, 50, 100, 0.20);
 }
 
 .social-chip:hover,
 .social-chip:focus-visible {
-  border-color: color-mix(in oklab, var(--primary) 48%, #d2e6ff);
+  border-color: color-mix(in oklab, #bdddff 62%, white);
   transform: translateY(-1px);
 }
 
