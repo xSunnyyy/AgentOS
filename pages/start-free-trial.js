@@ -19,6 +19,7 @@ const fileToDataUrl = (file) => new Promise((resolve, reject) => {
 export default function StartFreeTrialPage() {
   const formRef = useRef(null);
   const [step, setStep] = useState('form');
+  const [activeMediaIndex, setActiveMediaIndex] = useState(0);
   const [saleStartIndex, setSaleStartIndex] = useState(0);
   const [soldStartIndex, setSoldStartIndex] = useState(0);
   const [form, setForm] = useState({
@@ -33,7 +34,8 @@ export default function StartFreeTrialPage() {
     specializations: '',
     associatedCompany: '',
     socials: [createSocial()],
-    pictures: [createPicture()],
+    headshot: createPicture(),
+    galleryImages: [createPicture()],
     propertiesForSale: [createSaleProperty()],
     soldProperties: [createSoldProperty()],
     testimonials: [createTestimonial()],
@@ -82,7 +84,8 @@ export default function StartFreeTrialPage() {
     { heading: 'Associated Company', content: form.associatedCompany },
   ];
 
-  const galleryImages = [...form.pictures.map((item) => item.image).filter(Boolean), ...defaultGallery].slice(0, 6);
+  const featuredImages = [...form.galleryImages.map((item) => item.image).filter(Boolean), ...defaultGallery].slice(0, 5);
+  const activeMediaItem = featuredImages[activeMediaIndex] || defaultGallery[0];
   const visiblePropertyCount = 3;
   const getVisibleProperties = (items, startIndex) =>
     Array.from({ length: Math.min(visiblePropertyCount, items.length) }, (_, offset) => items[(startIndex + offset) % items.length]);
@@ -101,6 +104,14 @@ export default function StartFreeTrialPage() {
       }
       return current === 0 ? items.length - 1 : current - 1;
     });
+  };
+
+  const showPreviousMedia = () => {
+    setActiveMediaIndex((current) => (current === 0 ? featuredImages.length - 1 : current - 1));
+  };
+
+  const showNextMedia = () => {
+    setActiveMediaIndex((current) => (current === featuredImages.length - 1 ? 0 : current + 1));
   };
 
   if (step === 'preview') {
@@ -133,14 +144,18 @@ export default function StartFreeTrialPage() {
                 </div>
 
                 <div className="agent-headshot-wrap">
-                  <img className="agent-headshot" src={galleryImages[0] || defaultGallery[0]} alt={form.agentName ? `${form.agentName} headshot` : 'Agent headshot'} />
+                  <img className="agent-headshot" src={form.headshot.image || defaultGallery[0]} alt={form.headshot.alt || (form.agentName ? `${form.agentName} headshot` : 'Agent headshot')} />
                 </div>
               </div>
 
               <div className="featured-showcase">
                 <div className="featured-media-card trial-preview-gallery">
                   <div className="featured-media-view" role="region" aria-label="Featured property images">
-                    <img src={galleryImages[1] || galleryImages[0] || defaultGallery[1]} alt="Featured media" />
+                    <img src={activeMediaItem} alt="Featured media" />
+                    <div className="media-overlay-controls">
+                      <button type="button" className="media-arrow" onClick={showPreviousMedia} aria-label="View previous featured image">←</button>
+                      <button type="button" className="media-arrow" onClick={showNextMedia} aria-label="View next featured image">→</button>
+                    </div>
                   </div>
                 </div>
 
@@ -357,17 +372,33 @@ export default function StartFreeTrialPage() {
                 </div>
 
                 <div className="trial-group">
-                  <h2>Gallery Pictures</h2>
-                  {form.pictures.map((picture, index) => (
-                    <div key={`picture-${index}`} className="trial-card">
-                      <label>Upload Image {index + 1}</label>
-                      <input type="file" accept="image/*" onChange={async (event) => updateArrayFile('pictures', index, 'image', event.target.files?.[0])} />
-                      <input type="text" placeholder="Image alt text" value={picture.alt} onChange={(event) => updateArrayField('pictures', index, 'alt', event.target.value)} />
-                      {picture.image && <img className="trial-upload-preview" src={picture.image} alt={picture.alt || `Upload ${index + 1}`} />}
-                      {form.pictures.length > 1 && <button type="button" className="btn btn-secondary" onClick={() => removeArrayItem('pictures', index)}>Remove</button>}
+                  <h2>Headshot</h2>
+                  <div className="trial-card">
+                    <label>Upload Headshot</label>
+                    <input type="file" accept="image/*" onChange={async (event) => {
+                      const image = event.target.files?.[0] ? await fileToDataUrl(event.target.files[0]) : '';
+                      setForm((prev) => ({ ...prev, headshot: { ...prev.headshot, image } }));
+                    }}
+                    />
+                    <input type="text" placeholder="Headshot alt text" value={form.headshot.alt} onChange={(event) => setForm((prev) => ({ ...prev, headshot: { ...prev.headshot, alt: event.target.value } }))} />
+                    {form.headshot.image && <img className="trial-upload-preview" src={form.headshot.image} alt={form.headshot.alt || 'Headshot'} />}
+                  </div>
+                </div>
+
+                <div className="trial-group">
+                  <h2>Featured Images (up to 5)</h2>
+                  {form.galleryImages.map((picture, index) => (
+                    <div key={`gallery-${index}`} className="trial-card">
+                      <label>Featured Image {index + 1}</label>
+                      <input type="file" accept="image/*" onChange={async (event) => updateArrayFile('galleryImages', index, 'image', event.target.files?.[0])} />
+                      <input type="text" placeholder="Image alt text" value={picture.alt} onChange={(event) => updateArrayField('galleryImages', index, 'alt', event.target.value)} />
+                      {picture.image && <img className="trial-upload-preview" src={picture.image} alt={picture.alt || `Featured ${index + 1}`} />}
+                      {form.galleryImages.length > 1 && <button type="button" className="btn btn-secondary" onClick={() => removeArrayItem('galleryImages', index)}>Remove</button>}
                     </div>
                   ))}
-                  <button type="button" className="btn btn-secondary" onClick={() => addArrayItem('pictures', createPicture)}>Add Picture</button>
+                  {form.galleryImages.length < 5 && (
+                    <button type="button" className="btn btn-secondary" onClick={() => addArrayItem('galleryImages', createPicture)}>Add Featured Image</button>
+                  )}
                 </div>
 
                 <div className="trial-group">
