@@ -44,7 +44,7 @@ export default function RankRealEstateWebsitePage() {
           </nav>
 
             <div className="nav-actions">
-              <a className="btn btn-primary" href="/pricing">
+              <a className="btn btn-primary" href="/start-free-trial">
                 Start Building Free
               </a>
             </div>
