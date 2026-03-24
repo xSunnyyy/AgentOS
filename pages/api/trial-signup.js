@@ -22,8 +22,8 @@ export default function handler(req, res) {
 
   const payload = req.body;
 
-  if (!payload?.accountEmail || !payload?.password || !payload?.agentName) {
-    return res.status(400).json({ error: 'Missing required fields: accountEmail, password, agentName.' });
+  if (!payload || typeof payload !== 'object') {
+    return res.status(400).json({ error: 'Invalid payload.' });
   }
 
   ensureDataStore();

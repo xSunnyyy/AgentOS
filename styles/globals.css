@@ -1667,6 +1667,29 @@ section[aria-labelledby="sold-properties"] {
   gap: 0.7rem;
   margin: 1rem auto 2rem;
 }
+
+.trial-scroll-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(240px, 280px);
+  gap: 0.9rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+}
+
+.trial-mini-card {
+  min-height: 100%;
+}
+
+.trial-mini-card .property-image {
+  height: 160px;
+  object-fit: cover;
+}
+
+.trial-checkout-form {
+  display: grid;
+  gap: 1rem;
+}
 .billing-note {
   margin: 0.45rem 0 0.7rem;
   font-weight: 600;
@@ -1683,5 +1706,9 @@ section[aria-labelledby="sold-properties"] {
   .trial-preview-cta {
     justify-content: stretch;
     flex-direction: column;
+  }
+
+  .trial-scroll-row {
+    grid-auto-columns: minmax(220px, 84vw);
   }
 }
